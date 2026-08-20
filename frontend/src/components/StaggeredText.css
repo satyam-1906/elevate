@@ -1,0 +1,30 @@
+.staggered-text {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.staggered-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.staggered-char {
+  display: inline-block;
+  transform: translateY(115%) rotate(4deg);
+  opacity: 0;
+  filter: blur(4px);
+  transition-property: transform, opacity, filter;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.staggered-text.is-visible .staggered-char {
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+  filter: blur(0px);
+}
+
+.staggered-space {
+  display: inline-block;
+}

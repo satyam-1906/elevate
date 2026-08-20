@@ -1,0 +1,385 @@
+/* =============================================
+   NAV BLOOM — Flowbase Style Top Ambient Glow (Image 2)
+   ============================================= */
+.nav-bloom {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(880px, 96vw);
+  height: 220px;
+  background: radial-gradient(
+    ellipse at 50% 0%, 
+    rgba(124, 58, 237, 0.45) 0%, 
+    rgba(79, 70, 229, 0.3) 35%, 
+    rgba(37, 99, 235, 0.15) 60%, 
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 998;
+  filter: blur(20px);
+  animation: pulseBloom 9s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .nav-bloom {
+  background: radial-gradient(
+    ellipse at 50% 0%, 
+    rgba(99, 102, 241, 0.22) 0%, 
+    rgba(56, 189, 248, 0.15) 45%, 
+    transparent 75%
+  );
+}
+
+@keyframes pulseBloom {
+  0%   { opacity: 0.8; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+
+/* =============================================
+   NAVBAR WRAPPER
+   ============================================= */
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 20px 0;
+  pointer-events: none;
+}
+
+/* =============================================
+   PILL NAVBAR (Image 1 & 2 Glassmorphism)
+   ============================================= */
+.navbar-pill {
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 940px;
+  padding: 8px 10px 8px 18px;
+  border-radius: 999px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-wrapper.scrolled .navbar-pill {
+  border-color: var(--border-hover);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.2);
+}
+
+[data-theme="light"] .navbar-wrapper.scrolled .navbar-pill {
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12), 0 0 20px rgba(37, 99, 235, 0.08);
+}
+
+/* =============================================
+   LOGO
+   ============================================= */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.nav-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--grad-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.5);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover .nav-logo-mark {
+  transform: rotate(15deg) scale(1.05);
+}
+
+.nav-logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* =============================================
+   NAV LINKS
+   ============================================= */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.nav-caret {
+  opacity: 0.6;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-caret.open {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* =============================================
+   DROPDOWN MENU
+   ============================================= */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+  min-width: 320px;
+}
+
+.nav-dropdown.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.dropdown-card {
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45), 0 0 20px rgba(99, 102, 241, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.drop-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.drop-item:hover {
+  background: var(--surface-hover);
+  transform: translateX(4px);
+}
+
+.drop-item-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.drop-item:hover .drop-item-icon-wrapper {
+  background: var(--grad-2);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.drop-item-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.drop-item-desc {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* =============================================
+   ACTIONS
+   ============================================= */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: 14px;
+}
+
+.nav-cta-btn {
+  padding: 9px 18px;
+  font-size: 13px;
+  border-radius: 999px;
+}
+
+/* =============================================
+   HAMBURGER BUTTON
+   ============================================= */
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 0;
+}
+
+.ham,
+.ham::before,
+.ham::after {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.ham::before,
+.ham::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.ham::before { top: -5px; }
+.ham::after  { top: 5px; }
+
+.ham.open { background: transparent; }
+.ham.open::before { transform: translateY(5px) rotate(45deg); }
+.ham.open::after { transform: translateY(-5px) rotate(-45deg); }
+
+/* =============================================
+   MOBILE MENU
+   ============================================= */
+.mobile-nav {
+  pointer-events: all;
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  max-width: 940px;
+  border-top: none;
+  border-radius: 0 0 24px 24px;
+  padding: 16px 20px 20px;
+  gap: 4px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.mobile-nav.open {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.mob-section { margin-bottom: 6px; }
+
+.mob-link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.mob-link:hover { background: var(--surface-hover); }
+
+.mob-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 14px 10px;
+}
+
+.mob-sub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+}
+
+.mob-cta {
+  margin-top: 12px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+@media (max-width: 840px) {
+  .nav-links,
+  .nav-cta-btn { display: none; }
+  .hamburger-btn { display: flex; }
+  .mobile-nav { display: flex; }
+}

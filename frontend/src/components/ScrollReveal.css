@@ -1,0 +1,27 @@
+.scroll-reveal {
+  margin: 0;
+  padding: 0;
+}
+
+.scroll-reveal-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 12px 0 16px;
+}
+
+.sr-word {
+  display: inline-block;
+  will-change: opacity, filter;
+}
+
+/* Per-section overrides */
+.sponsors-scroll-reveal .scroll-reveal-text {
+  font-size: clamp(32px, 4.5vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin: 12px 0 0;
+}
