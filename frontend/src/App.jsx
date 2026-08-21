@@ -1,17 +1,10 @@
 import { useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Domains from './components/Domains';
-import Events from './components/Events';
-import Legacy from './components/Legacy';
-import Knowledge from './components/Knowledge';
-import Challenges from './components/Challenges';
-import Sponsors from './components/Sponsors';
-import Footer from './components/Footer';
+import Navbar from './components/layout/Navbar';
+import Home from './pages/Home/Home';
+import Footer from './components/layout/Footer';
 import { useLenis } from './hooks/useLenis';
-// import BubbleCursor from './components/BubbleCursor'; // ← keep for future use
+// import BubbleCursor from './components/motion/BubbleCursor'; // ← keep for future use
 
 function AppContent() {
   // ── Lenis smooth scroll (spring inertia + GSAP sync) ──────────────────
@@ -90,14 +83,7 @@ function AppContent() {
       <div className="app-container">
         <Navbar />
         <main>
-          <Hero />
-          <About />
-          <Domains />
-          <Events />
-          <Legacy />
-          <Knowledge />
-          <Challenges />
-          <Sponsors />
+          <Home />
         </main>
         <Footer />
       </div>
