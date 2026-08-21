@@ -1,4 +1,5 @@
 import { Sparkles, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
@@ -76,7 +77,7 @@ export default function Footer() {
             <h4 className="footer-title">Platform</h4>
             <ul className="footer-list">
               <li><a href="#about">About Us</a></li>
-              <li><a href="#legacy">Our Legacy</a></li>
+              <li><Link to="/legacy">Our Legacy</Link></li>
               <li><a href="#sponsors">Industry Sponsors</a></li>
               <li><a href="#contact">Contact Core Team</a></li>
               <li><a href="#guidelines">Code of Conduct</a></li>

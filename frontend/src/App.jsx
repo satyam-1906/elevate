@@ -1,10 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home/Home';
 import Footer from './components/layout/Footer';
 import { useLenis } from './hooks/useLenis';
-// import BubbleCursor from './components/motion/BubbleCursor'; // ← keep for future use
+
+/* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
+const LegacyPage = lazy(() => import('./pages/Legacy/LegacyPage'));
+
+/* ── Scroll to top on route change ────────────────────────────────── */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function AppContent() {
   // ── Lenis smooth scroll (spring inertia + GSAP sync) ──────────────────
@@ -77,13 +89,22 @@ function AppContent() {
         <div className="mesh-blob mesh-blob-3" />
       </div>
 
-      {/* BubbleCursor disabled — uncomment below to re-enable */}
-      {/* <BubbleCursor size={26} trail={18} follow={0.55} /> */}
+      <ScrollToTop />
 
       <div className="app-container">
         <Navbar />
         <main>
-          <Home />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/legacy"
+              element={
+                <Suspense fallback={<div className="legacy-scene-loading" style={{ minHeight: '100vh' }} />}>
+                  <LegacyPage />
+                </Suspense>
+              }
+            />
+          </Routes>
         </main>
         <Footer />
       </div>
@@ -93,10 +114,13 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

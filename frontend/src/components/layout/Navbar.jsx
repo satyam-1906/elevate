@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Globe, 
   Layers, 
@@ -29,7 +30,7 @@ const navItems = [
       { Icon: GitBranch, title: 'Open Source', desc: 'Collaborative development & tooling' },
     ],
   },
-  { label: 'Legacy', href: '#legacy' },
+  { label: 'Legacy', href: '/legacy', isRoute: true },
   { label: 'Events', href: '#events' },
   { label: 'Sponsors', href: '#sponsors' },
   {
@@ -89,18 +90,27 @@ export default function Navbar() {
                 onMouseEnter={() => item.dropdown && openDrop(item.label)}
                 onMouseLeave={closeDrop}
               >
-                <a
-                  href={item.href}
-                  className={`nav-link ${activeDropdown === item.label ? 'active' : ''}`}
-                >
-                  {item.label}
-                  {item.dropdown && (
-                    <ChevronDown
-                      size={14}
-                      className={`nav-caret ${activeDropdown === item.label ? 'open' : ''}`}
-                    />
-                  )}
-                </a>
+                {item.isRoute ? (
+                  <Link
+                    to={item.href}
+                    className={`nav-link ${activeDropdown === item.label ? 'active' : ''}`}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className={`nav-link ${activeDropdown === item.label ? 'active' : ''}`}
+                  >
+                    {item.label}
+                    {item.dropdown && (
+                      <ChevronDown
+                        size={14}
+                        className={`nav-caret ${activeDropdown === item.label ? 'open' : ''}`}
+                      />
+                    )}
+                  </a>
+                )}
 
                 {/* Dropdown Card */}
                 {item.dropdown && (
@@ -152,9 +162,15 @@ export default function Navbar() {
         <div className={`mobile-nav glass ${mobileOpen ? 'open' : ''}`}>
           {navItems.map(item => (
             <div key={item.label} className="mob-section">
-              <a href={item.href} className="mob-link" onClick={() => setMobileOpen(false)}>
-                {item.label}
-              </a>
+              {item.isRoute ? (
+                <Link to={item.href} className="mob-link" onClick={() => setMobileOpen(false)}>
+                  {item.label}
+                </Link>
+              ) : (
+                <a href={item.href} className="mob-link" onClick={() => setMobileOpen(false)}>
+                  {item.label}
+                </a>
+              )}
               {item.dropdown && (
                 <div className="mob-sub">
                   {item.dropdown.map(({ Icon, title }) => (
