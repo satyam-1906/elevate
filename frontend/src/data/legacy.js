@@ -3,65 +3,65 @@
 
 export const orgHierarchy = {
   id: 'lead',
-  name: 'Ayush Kathal',
+  name: 'Alex Johnson',
   role: 'Lead',
-  githubUrl: 'https://github.com/ayushkathal2005',
+  githubUrl: 'https://github.com/alexjohnson',
   children: [
     {
       id: 'co-lead',
-      name: 'Swapnil',
+      name: 'Taylor Smith',
       role: 'Co-Lead',
-      githubUrl: 'https://github.com/Swapnil220705',
+      githubUrl: 'https://github.com/taylorsmith',
       children: [
         {
           id: 'head-tech-ops',
-          name: 'Suraj',
+          name: 'Jordan Lee',
           role: 'Head of Technical Operations',
-          githubUrl: 'https://github.com/surajiiitn',
+          githubUrl: 'https://github.com/jordanlee',
           children: [
             {
               id: 'webdev-lead',
-              name: 'Arnab Mistry',
+              name: 'Morgan Davis',
               role: 'Web Dev Lead',
-              githubUrl: 'https://github.com/ArnabMistry',
+              githubUrl: 'https://github.com/morgandavis',
               children: [
-                { id: 'webdev-colead', name: 'Arnz', role: 'Web Dev Co-Lead', githubUrl: 'https://github.com/Arnz18', children: [] },
+                { id: 'webdev-colead', name: 'Casey White', role: 'Web Dev Co-Lead', githubUrl: 'https://github.com/caseywhite', children: [] },
               ],
             },
             {
               id: 'web3-lead',
-              name: 'Abhist',
+              name: 'Riley Brown',
               role: 'Web3 Lead',
-              githubUrl: 'https://github.com/Abhist17',
+              githubUrl: 'https://github.com/rileybrown',
               children: [
-                { id: 'web3-colead', name: 'Vedansh Shukla', role: 'Web3 Co-Lead', githubUrl: 'https://github.com/VedanshShuklaa', children: [] },
+                { id: 'web3-colead', name: 'Quinn Taylor', role: 'Web3 Co-Lead', githubUrl: 'https://github.com/quinntaylor', children: [] },
               ],
             },
             {
               id: 'appdev-lead',
-              name: 'Kunal',
+              name: 'Avery Wilson',
               role: 'App Dev Lead',
-              githubUrl: 'https://github.com/Kunal218sss',
+              githubUrl: 'https://github.com/averywilson',
               children: [
-                { id: 'appdev-colead', name: 'Dhruv Khandelwal', role: 'App Dev Co-Lead', githubUrl: 'https://github.com/dhruvkhandelwal005', children: [] },
+                { id: 'appdev-colead', name: 'Skyler Moore', role: 'App Dev Co-Lead', githubUrl: 'https://github.com/skylermoore', children: [] },
               ],
             },
             {
               id: 'opensource-lead',
-              name: 'Ojaswi Joshi',
+              name: 'Peyton Clark',
               role: 'Open Source Lead',
-              githubUrl: 'https://github.com/OjaswiJoshi13',
+              githubUrl: 'https://github.com/peytonclark',
               children: [
-                { id: 'opensource-colead', name: 'Dhruv', role: 'Open Source Co-Lead', githubUrl: 'https://github.com/dhruvnnd', children: [] },
+                { id: 'opensource-colead', name: 'Rowan King', role: 'Open Source Co-Lead', githubUrl: 'https://github.com/rowanking', children: [] },
               ],
             },
             {
               id: 'aiml-lead',
-              name: 'Samarth',
+              name: 'Dakota Wright',
               role: 'AI/ML Lead',
-              githubUrl: 'https://github.com/Samarth101',
+              githubUrl: 'https://github.com/dakotawright',
               children: [
-                { id: 'aiml-colead', name: 'Raveena', role: 'AI/ML Co-Lead', githubUrl: 'https://github.com/raveena2309', children: [] },
+                { id: 'aiml-colead', name: 'Parker Scott', role: 'AI/ML Co-Lead', githubUrl: 'https://github.com/parkerscott', children: [] },
               ],
             },
           ],
