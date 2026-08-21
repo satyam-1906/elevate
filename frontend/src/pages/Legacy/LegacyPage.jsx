@@ -57,6 +57,30 @@ function useMQ(query) {
   return m;
 }
 
+/* ── Archive Intro — terminal-themed header shown before the 3D scroll ── */
+function LegacyIntro() {
+  return (
+    <div className="legacy-intro">
+      <div className="legacy-intro-inner">
+        <span className="legacy-intro-tag">
+          <span className="legacy-intro-tag-dot" aria-hidden="true" />
+          THE ARCHIVE
+        </span>
+        <h1 className="legacy-intro-title">
+          Our Legacy
+        </h1>
+        <p className="legacy-intro-subtitle">
+          Scroll to travel through the leadership that built Elevate —
+          from the founding era to today.
+        </p>
+        <div className="legacy-intro-scroll-hint" aria-hidden="true">
+          <span className="legacy-intro-scroll-arrow" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Desktop Experience ──────────────────────────────────────────── */
 function LegacyDesktop({ entries }) {
   const archiveRef      = useRef(null);
@@ -64,6 +88,7 @@ function LegacyDesktop({ entries }) {
   const scrollVelocity  = useRef(0);
   const activeIdxRef    = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isFoundingEra, setIsFoundingEra] = useState(false);
 
   /* ScrollTrigger: drives progress/velocity refs and active-node state */
   useEffect(() => {
@@ -85,12 +110,13 @@ function LegacyDesktop({ entries }) {
         if (idx !== activeIdxRef.current) {
           activeIdxRef.current = idx;
           setActiveIndex(idx);
+          setIsFoundingEra(entries[idx]?.isFoundingEra || false);
         }
       },
     });
 
     return () => st.kill();
-  }, [entries.length]);
+  }, [entries]);
 
   const height = `${(entries.length + 1) * 100}vh`;
   const mobileFallback = (
@@ -99,8 +125,10 @@ function LegacyDesktop({ entries }) {
 
   return (
     <section id="legacy">
+      <LegacyIntro />
+
       <div
-        className="legacy-archive"
+        className={`legacy-archive ${isFoundingEra ? 'is-founding-era' : ''}`}
         ref={archiveRef}
         style={{ height }}
       >

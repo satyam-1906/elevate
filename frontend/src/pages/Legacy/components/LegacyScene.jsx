@@ -23,8 +23,8 @@ import {
   SpriteMaterial,
   CanvasTexture,
   AdditiveBlending,
-  Clock,
 } from 'three';
+import { Timer } from 'three/src/core/Timer.js';
 import { createCameraRig, NODE_SPACING } from './LegacyCameraRig';
 import { createConnectors } from './LegacyConnector';
 
@@ -75,7 +75,6 @@ const VERT = /* glsl */ `
 `;
 
 const FRAG = /* glsl */ `
-  precision mediump float;
   varying float vAlpha;
   varying float vSeed;
   uniform float uVel;
@@ -218,13 +217,15 @@ export default function LegacyScene({
     ro.observe(el);
 
     /* ── Render loop ──────────────────────────────────────── */
-    const clock = new Clock();
+    const timer = new Timer();
+    timer.connect(document);
     let prevActive = -1;
     let raf = 0;
 
-    const render = () => {
+    const render = (timestamp) => {
       if (!alive) return;
-      const t   = clock.getElapsedTime();
+      timer.update(timestamp);
+      const t   = timer.getElapsed();
       const p   = scrollProgressRef.current || 0;
       const vel = scrollVelocityRef.current || 0;
       const vN  = Math.min(1, Math.abs(vel) / VELOCITY_CEIL);
@@ -238,13 +239,11 @@ export default function LegacyScene({
       /* Active node index */
       const ai = Math.min(entries.length - 1, Math.max(0, Math.floor(p * entries.length)));
 
-      /* Subtle arrival FOV change for founding era */
-      if (ai !== prevActive) {
-        const target = entries[ai]?.isFoundingEra ? FOV_ARRIVAL : FOV_DEFAULT;
-        camera.fov += (target - camera.fov) * 0.08;
-        camera.updateProjectionMatrix();
-        prevActive = ai;
-      }
+      /* Smooth FOV transition — founding era gets a subtle zoom to create
+         the "signature moment" of arrival. Lerps every frame for fluid feel. */
+      const targetFov = entries[ai]?.isFoundingEra ? FOV_ARRIVAL : FOV_DEFAULT;
+      camera.fov += (targetFov - camera.fov) * 0.06;
+      camera.updateProjectionMatrix();
 
       /* Orbs */
       orbs.forEach((sp, i) => {
@@ -284,6 +283,7 @@ export default function LegacyScene({
       orbs.forEach((s) => s.material.dispose());
       conn.dispose();
       rig.dispose();
+      timer.dispose();
       renderer.dispose();
       renderer.forceContextLoss();
       renderer.domElement.remove();
