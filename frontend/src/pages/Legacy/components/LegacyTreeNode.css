@@ -1,0 +1,101 @@
+.legacy-tree-node-card {
+  position: absolute;
+  /* Centered perfectly on the origin */
+  top: -30px;
+  left: -80px;
+  width: 160px;
+  height: 60px;
+  background: rgba(11, 15, 25, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  z-index: 10;
+  
+  /* Initial transition for hover */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              border-color 0.3s ease, 
+              background 0.3s ease;
+  
+  /* Will-change for performance since this moves constantly */
+  will-change: transform;
+}
+
+/* We don't animate the actual transform on hover because it's being driven 
+   by JS (the 3D projection). Instead, we animate scale on the inner element 
+   or apply a composite transform if needed. But JS writes inline transform!
+   Since JS sets `transform: translate(x, y)`, if we want hover scale, 
+   we can wrap the card contents in an inner div and scale *that*.
+*/
+.legacy-tree-node-inner {
+  text-align: center;
+  padding: 0 12px;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.legacy-tree-node-card:hover .legacy-tree-node-inner,
+.legacy-tree-node-card:focus-visible .legacy-tree-node-inner {
+  transform: scale(1.05);
+}
+
+.legacy-tree-node-card:hover,
+.legacy-tree-node-card:focus-visible {
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(11, 15, 25, 0.9);
+  outline: none;
+}
+
+.legacy-tree-node-card:focus-visible {
+  box-shadow: 0 0 0 2px #38BDF8;
+}
+
+.legacy-tree-node-name {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #F8FAFC;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.legacy-tree-node-role {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #94A3B8;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The hover glow effect */
+.legacy-tree-node-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  z-index: -1;
+}
+
+.legacy-tree-node-card:hover .legacy-tree-node-glow,
+.legacy-tree-node-card:focus-visible .legacy-tree-node-glow {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.5);
+}

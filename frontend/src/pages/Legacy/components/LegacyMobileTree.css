@@ -1,0 +1,119 @@
+.legacy-mobile-tree-wrapper {
+  padding: 80px 24px;
+  background: #0B0F19; /* matches standard legacy bg */
+  color: #F8FAFC;
+  min-height: 100vh;
+}
+
+.legacy-mobile-intro {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.mobile-year-section {
+  margin-bottom: 100px;
+}
+
+.mobile-year-header {
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+}
+
+.mobile-year-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #38BDF8;
+}
+
+/* -- Nested Tree Layout -- */
+
+.mobile-tree-container {
+  position: relative;
+}
+
+.mobile-tree-node {
+  position: relative;
+}
+
+.mobile-tree-children {
+  position: relative;
+  margin-left: 24px; /* Indentation */
+  padding-top: 16px;
+}
+
+/* The vertical connecting line from parent down to children */
+.mobile-tree-children::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 24px; /* don't go all the way to the bottom of the last child */
+  left: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(56, 189, 248, 0.5), rgba(56, 189, 248, 0.1));
+}
+
+.mobile-tree-child-wrapper {
+  position: relative;
+  padding-left: 24px;
+  padding-bottom: 16px;
+}
+
+/* The horizontal connector to each child */
+.mobile-tree-child-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 24px; /* aligns with middle of the card */
+  left: 0;
+  width: 24px;
+  height: 1px;
+  background: rgba(56, 189, 248, 0.3);
+}
+
+/* Last child doesn't need padding-bottom */
+.mobile-tree-child-wrapper:last-child {
+  padding-bottom: 0;
+}
+
+/* -- Card Styles -- */
+
+.mobile-tree-card {
+  display: block;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  z-index: 2; /* keep above lines */
+}
+
+.mobile-tree-card:hover, .mobile-tree-card:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  outline: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-tree-card:focus-visible {
+  box-shadow: 0 0 0 2px #38BDF8;
+}
+
+.mobile-tree-name {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #F8FAFC;
+  margin-bottom: 4px;
+}
+
+.mobile-tree-role {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: #94A3B8;
+}

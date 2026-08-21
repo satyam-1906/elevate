@@ -11,16 +11,16 @@
 import { useState, useEffect, useRef, lazy, Suspense, Component } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { legacyEntries } from '../../data/legacy';
+import { legacyYears } from '../../data/legacy';
 import LegacyHUD from './components/LegacyHUD';
-import LegacyNode from './components/LegacyNode';
-import LegacyMobileList from './components/LegacyMobileList';
+import LegacyMobileTree from './components/LegacyMobileTree';
 import './LegacyPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* Lazy-load the heavy Three.js scene so it's in its own chunk */
-const LegacyScene = lazy(() => import('./components/LegacyScene'));
+/* Lazy-load the heavy Three.js scene so it's in its own chunk */
+const LegacyGalaxy = lazy(() => import('./components/LegacyGalaxy'));
 
 /* ── WebGL detection ─────────────────────────────────────────────── */
 function hasWebGL() {
@@ -99,6 +99,12 @@ function LegacyDesktop({ entries }) {
       trigger: el,
       start: 'top top',
       end: 'bottom bottom',
+      snap: {
+        snapTo: 1 / Math.max(1, entries.length - 1),
+        duration: { min: 0.6, max: 1.2 },
+        delay: 0.05, // snap quickly after scroll stops
+        ease: 'back.out(1.4)'
+      },
       onUpdate(self) {
         scrollProgress.current = self.progress;
         scrollVelocity.current = self.getVelocity();
@@ -120,7 +126,7 @@ function LegacyDesktop({ entries }) {
 
   const height = `${(entries.length + 1) * 100}vh`;
   const mobileFallback = (
-    <LegacyMobileList entries={entries} reducedMotion={false} />
+    <LegacyMobileTree entries={entries} />
   );
 
   return (
@@ -135,7 +141,7 @@ function LegacyDesktop({ entries }) {
         <div className="legacy-sticky">
           <SceneErrorBoundary fallback={mobileFallback}>
             <Suspense fallback={<div className="legacy-scene-loading" />}>
-              <LegacyScene
+              <LegacyGalaxy
                 entries={entries}
                 scrollProgressRef={scrollProgress}
                 scrollVelocityRef={scrollVelocity}
@@ -144,38 +150,6 @@ function LegacyDesktop({ entries }) {
           </SceneErrorBoundary>
 
           <LegacyHUD entries={entries} activeIndex={activeIndex} />
-
-          <div className="legacy-content-overlay">
-            <LegacyNode
-              entry={entries[activeIndex]}
-              isActive
-              key={entries[activeIndex].id}
-            />
-          </div>
-        </div>
-
-        {/* Screen-reader-accessible version of all entries */}
-        <div className="sr-only" aria-label="Leadership archive entries">
-          {entries.map((e) => (
-            <article key={e.id}>
-              <h3>
-                {e.leaderName} — {e.position} ({e.yearRange})
-              </h3>
-              <p>{e.shortBio}</p>
-              <h4>Contributions</h4>
-              <ul>
-                {e.contributions.map((c, i) => (
-                  <li key={i}>{c}</li>
-                ))}
-              </ul>
-              <h4>Achievements</h4>
-              <ul>
-                {e.achievements.map((a, i) => (
-                  <li key={i}>{a}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
         </div>
       </div>
     </section>
@@ -193,10 +167,10 @@ export default function LegacyPage() {
   if (!desktop) {
     return (
       <section id="legacy">
-        <LegacyMobileList entries={legacyEntries} reducedMotion={reduced} />
+        <LegacyMobileTree entries={legacyYears} />
       </section>
     );
   }
 
-  return <LegacyDesktop entries={legacyEntries} />;
+  return <LegacyDesktop entries={legacyYears} />;
 }
