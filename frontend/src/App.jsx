@@ -5,6 +5,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home/Home';
 import Footer from './components/layout/Footer';
+import Teams from './pages/Teams/Teams';
 import LogoReveal from './components/motion/LogoReveal';
 import { useLenis } from './hooks/useLenis';
 
@@ -104,6 +105,7 @@ function AppContent() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/teams" element={<Teams />} />
             <Route
               path="/legacy"
               element={

@@ -31,6 +31,7 @@ const navItems = [
     ],
   },
   { label: 'Legacy', href: '/legacy', isRoute: true },
+  { label: 'Teams', href: '/teams', isRoute: true },
   { label: 'Events', href: '#events' },
   { label: 'Sponsors', href: '#sponsors' },
   {

@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileCard from '../../../components/common/ProfileCard';
+import ProfileCard from '../../components/common/ProfileCard';
 import { Users } from 'lucide-react';
-import StaggeredText from '../../../components/motion/StaggeredText';
-import './Team.css';
+import StaggeredText from '../../components/motion/StaggeredText';
+import './Teams.css';
 
 const codeIconUrl = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGV4dCB4PSI1MCIgeT0iMTIwIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjgwIiBmaWxsPSJ3aGl0ZSIgZm9udC13ZWlnaHQ9ImJvbGQiPiZsdDsvJmd0OzwvdGV4dD48L3N2Zz4=`;
 const baseGradient = "linear-gradient(145deg, #101625 0%, #202b4d 100%)"; // Dark sleek background 
@@ -42,16 +42,16 @@ const teamData = {
   ]
 };
 
-export default function Team() {
+export default function Teams() {
   return (
-    <section id="team" className="section team-section">
+    <section id="teams-page" className="section team-section" style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: '80px' }}>
       <div className="container text-center mb-12">
         <span className="section-tag">
           <Users size={13} />
           <span>Leadership</span>
         </span>
         <h2 className="section-title">
-          <StaggeredText text="Meet the ELEVATE Team" />
+          <StaggeredText text="Meet the Elevate Team" />
         </h2>
         <p className="section-subtitle mx-auto">
           The brilliant minds leading our highly specialized domains.
