@@ -1,9 +1,11 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home/Home';
 import Footer from './components/layout/Footer';
+import LogoReveal from './components/motion/LogoReveal';
 import { useLenis } from './hooks/useLenis';
 
 /* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
@@ -80,6 +82,8 @@ function AppContent() {
     return () => observer.disconnect();
   }, []);
 
+  const [showIntro, setShowIntro] = useState(true);
+
   return (
     <>
       {/* Live Ambient Mesh Glow */}
@@ -88,6 +92,10 @@ function AppContent() {
         <div className="mesh-blob mesh-blob-2" />
         <div className="mesh-blob mesh-blob-3" />
       </div>
+
+      <AnimatePresence>
+        {showIntro && <LogoReveal onComplete={() => setShowIntro(false)} logoSrc="/logo.png" />}
+      </AnimatePresence>
 
       <ScrollToTop />
 

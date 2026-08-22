@@ -6,6 +6,7 @@ import Legacy from './sections/Legacy';
 import Knowledge from './sections/Knowledge';
 import Challenges from './sections/Challenges';
 import Sponsors from './sections/Sponsors';
+import Team from './sections/Team';
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
       <Hero />
       <About />
       <Domains />
+      <Team />
       <Events />
       <Legacy />
       <Knowledge />

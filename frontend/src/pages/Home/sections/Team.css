@@ -1,0 +1,98 @@
+.team-section {
+  position: relative;
+  z-index: 10;
+}
+
+.team-tree-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.tree-tier {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.flex-tier {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 10px;
+}
+
+.tree-node,
+.tree-node-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Base card styling and size constraints */
+.team-profile-card {
+  width: 250px !important;
+  max-width: 250px;
+}
+.team-profile-card .pc-card {
+  height: 360px !important;
+}
+
+/* Titles that map out the tree levels */
+.group-heading {
+  margin-top: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
+
+/* Branch styling to simulate hierarchy connections */
+.tree-branch {
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+
+.vertical-branch {
+  width: 2px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.vertical-branch-long {
+  width: 2px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.spaced-branch {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments for maintaining card size best fit */
+@media (max-width: 800px) {
+  .team-profile-card {
+    width: 230px !important;
+    max-width: 230px;
+  }
+  .team-profile-card .pc-card {
+    height: 330px !important;
+  }
+  .flex-tier {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .team-profile-card {
+    width: 200px !important;
+    max-width: 200px;
+  }
+  .team-profile-card .pc-card {
+    height: 300px !important;
+  }
+}
