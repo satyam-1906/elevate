@@ -4,7 +4,6 @@ import { Users } from 'lucide-react';
 import StaggeredText from '../../components/motion/StaggeredText';
 import './Teams.css';
 
-const codeIconUrl = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGV4dCB4PSI1MCIgeT0iMTIwIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjgwIiBmaWxsPSJ3aGl0ZSIgZm9udC13ZWlnaHQ9ImJvbGQiPiZsdDsvJmd0OzwvdGV4dD48L3N2Zz4=`;
 const baseGradient = "linear-gradient(145deg, #101625 0%, #202b4d 100%)"; // Dark sleek background 
 
 const teamData = {
@@ -69,7 +68,6 @@ export default function Teams() {
               status={teamData.lead.status}
               avatarUrl={teamData.lead.avatarUrl}
               className="team-profile-card"
-              iconUrl={codeIconUrl}
               innerGradient={baseGradient}
             />
           </div>
@@ -87,7 +85,6 @@ export default function Teams() {
               status={teamData.colead.status}
               avatarUrl={teamData.colead.avatarUrl}
               className="team-profile-card"
-              iconUrl={codeIconUrl}
               innerGradient={baseGradient}
             />
           </div>
@@ -109,7 +106,6 @@ export default function Teams() {
                 status={lead.status}
                 avatarUrl={lead.avatarUrl}
                 className="team-profile-card"
-                iconUrl={codeIconUrl}
                 innerGradient={baseGradient}
               />
             </div>
@@ -132,7 +128,6 @@ export default function Teams() {
                 status={lead.status}
                 avatarUrl={lead.avatarUrl}
                 className="team-profile-card"
-                iconUrl={codeIconUrl}
                 innerGradient={baseGradient}
               />
             </div>
