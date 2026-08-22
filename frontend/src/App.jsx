@@ -95,7 +95,7 @@ function AppContent() {
       </div>
 
       <AnimatePresence>
-        {showIntro && <LogoReveal onComplete={() => setShowIntro(false)} logoSrc="/logo.png" />}
+        {showIntro && <LogoReveal onComplete={() => setShowIntro(false)} logoSrc="/logo.jpg" />}
       </AnimatePresence>
 
       <ScrollToTop />

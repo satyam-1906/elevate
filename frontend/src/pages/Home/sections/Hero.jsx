@@ -3,6 +3,7 @@ import { ArrowRight, Compass } from 'lucide-react';
 import FloatingLines from '../../../components/motion/FloatingLines';
 // import NeuroNoise from '../../../components/motion/NeuroNoise'; // ← keep for fallback
 import StaggeredText from '../../../components/motion/StaggeredText';
+import RotatingText from '../../../components/motion/RotatingText';
 import './Hero.css';
 
 // Elevate brand colors: indigo-blue → violet-pink → sky-blue gradient
@@ -48,11 +49,7 @@ export default function Hero() {
               delay={0.1}
             />
             <br />
-            <StaggeredText 
-              text="in real time." 
-              className="hero-line-2 gradient-text"
-              delay={0.3}
-            />
+            <RotatingText className="hero-line-2" />
           </h1>
 
           <p className="hero-subtitle">

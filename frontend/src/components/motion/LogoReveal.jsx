@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function LogoReveal({ onComplete, logoSrc = "/logo.png" }) {
+export default function LogoReveal({ onComplete, logoSrc = "/logo.jpg" }) {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
