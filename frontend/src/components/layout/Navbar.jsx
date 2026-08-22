@@ -11,8 +11,7 @@ import {
   BookOpen, 
   Trophy,
   ChevronDown,
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
@@ -76,9 +75,7 @@ export default function Navbar() {
 
           {/* Logo with Space Grotesk font */}
           <a href="/" className="nav-logo">
-            <div className="nav-logo-mark">
-              <Sparkles size={16} className="logo-sparkle" />
-            </div>
+            <img src="/logo.jpg" alt="Elevate Logo" className="nav-logo-img" />
             <span className="nav-logo-text brand-font">Elevate</span>
           </a>
 
