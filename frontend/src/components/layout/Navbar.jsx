@@ -39,15 +39,7 @@ const navItems = [
   { label: 'Events', href: '/events', isRoute: true },
   { label: 'Sponsors', href: '/#sponsors' },
 
-  {
-    label: 'Knowledge Hub',
-    href: '/#knowledge',
-    dropdown: [
-      { Icon: Compass, title: 'Roadmaps', desc: 'Structured zero-to-hero curriculum', href: '/#knowledge' },
-      { Icon: BookOpen, title: 'Tutorials', desc: 'In-depth engineering write-ups', href: '/#knowledge' },
-      { Icon: Trophy, title: 'Challenges', desc: 'Compete on leaderboards & win bounties', href: '/#challenges' },
-    ],
-  },
+  { label: 'Knowledge Hub', href: '/knowledge-hub', isRoute: true },
 ];
 
 export default function Navbar() {

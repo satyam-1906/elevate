@@ -12,6 +12,7 @@ import { useLenis } from './hooks/useLenis';
 import LoginPage from './pages/Login/LoginPage';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
 import EventsPage from './pages/Events/EventsPage';
+import KnowledgeHubPage from './pages/KnowledgeHub/KnowledgeHubPage';
 
 /* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
 const LegacyPage = lazy(() => import('./pages/Legacy/LegacyPage'));
@@ -143,7 +144,19 @@ function AppContent() {
     return () => observer.disconnect();
   }, []);
 
-  const [showIntro, setShowIntro] = useState(true);
+  const location = useLocation();
+  const [showIntro, setShowIntro] = useState(() => {
+    const introPlayed = sessionStorage.getItem('introPlayed');
+    if (!introPlayed && location.pathname === '/') {
+      return true;
+    }
+    return false;
+  });
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem('introPlayed', 'true');
+    setShowIntro(false);
+  };
 
   return (
     <>
@@ -155,7 +168,7 @@ function AppContent() {
       </div>
 
       <AnimatePresence>
-        {showIntro && <LogoReveal onComplete={() => setShowIntro(false)} logoSrc="/logo.jpg" />}
+        {showIntro && <LogoReveal onComplete={handleIntroComplete} logoSrc="/logo.jpg" />}
       </AnimatePresence>
 
       <ScrollToHashOrTop lenisRef={lenisRef} />
@@ -167,6 +180,7 @@ function AppContent() {
             <Route path="/" element={<Home />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/events" element={<EventsPage />} />
+            <Route path="/knowledge-hub" element={<KnowledgeHubPage />} />
             <Route
               path="/legacy"
               element={
