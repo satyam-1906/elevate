@@ -33,7 +33,7 @@ const ProfileCardComponent = ({
   handle = 'javicodes',
   status = 'Online',
   contactText = 'Contact',
-  showUserInfo = true,
+  showUserInfo = false,
   onContactClick
 }) => {
   const wrapRef = useRef(null);

@@ -20,9 +20,13 @@ function NodeCard({ node, nodesRef }) {
                <div className="bar"></div>
             </div>
           </div>
-          <div className="node-body">
-            <div className="node-avatar">
-              {node.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+          <div className="node-body" style={node.imageUrl ? { flexDirection: 'column' } : {}}>
+            <div className="node-avatar" style={node.imageUrl ? { width: '100%', height: '220px', clipPath: 'none', borderRadius: '4px', background: 'transparent', border: '1px solid var(--glow)' } : {}}>
+              {node.imageUrl ? (
+                <img src={node.imageUrl} alt={node.name} style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '4px' }} />
+              ) : (
+                node.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+              )}
             </div>
             <div className="node-info">
               <h3 className="node-name">{node.name}</h3>

@@ -3,25 +3,27 @@ import ProfileCard from '../../components/common/ProfileCard';
 import { Users } from 'lucide-react';
 import StaggeredText from '../../components/motion/StaggeredText';
 import './Teams.css';
+import leadPic from '../../assets/images/Lead_elevate_2026.jpeg';
+import coleadPic from '../../assets/images/Co_lead_elevate_2026.jpg';
 
 const baseGradient = "linear-gradient(145deg, #101625 0%, #202b4d 100%)"; // Dark sleek background 
 
 const teamData = {
   lead: {
     id: 1,
-    name: 'Current Lead',
+    name: 'Satyam Samal',
     title: 'Elevate Lead',
     handle: 'elevate_lead',
     status: 'Online',
-    avatarUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=256&auto=format&fit=crop'
+    avatarUrl: leadPic
   },
   colead: {
     id: 2,
-    name: 'Co-Lead',
+    name: 'Krushna Mali',
     title: 'Elevate Co-Lead',
     handle: 'elevate_colead',
     status: 'Busy',
-    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=256&auto=format&fit=crop'
+    avatarUrl: coleadPic
   },
   nonTechLeads: [
     { id: 'nt1', name: 'Corporate Lead', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=256&auto=format&fit=crop' },
