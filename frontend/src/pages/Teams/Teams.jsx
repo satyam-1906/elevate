@@ -44,7 +44,7 @@ const teamData = {
 export default function Teams() {
   return (
     <section id="teams-page" className="section team-section" style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: '80px' }}>
-      <div className="container text-center mb-12">
+      <div className="container teams-hero">
         <span className="section-tag">
           <Users size={13} />
           <span>Leadership</span>
@@ -52,7 +52,7 @@ export default function Teams() {
         <h2 className="section-title">
           <StaggeredText text="Meet the Elevate Team" />
         </h2>
-        <p className="section-subtitle mx-auto">
+        <p className="section-subtitle teams-subtitle">
           The brilliant minds leading our highly specialized domains.
         </p>
       </div>
