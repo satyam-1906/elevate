@@ -21,6 +21,15 @@ router.post(
   eventController.createEvent
 );
 
+// Admin-only route to update an event
+router.put(
+  '/:id',
+  requireAuth,
+  requireAdmin,
+  upload.single('image'),
+  eventController.updateEvent
+);
+
 // Admin-only route to delete an event
 router.delete(
   '/:id',
@@ -30,3 +39,4 @@ router.delete(
 );
 
 module.exports = router;
+

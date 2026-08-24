@@ -53,34 +53,34 @@ export default function Footer() {
           <div className="footer-links-group">
             <h4 className="footer-title">Technical Tracks</h4>
             <ul className="footer-list">
-              <li><a href="#domains">Web2 & Cloud</a></li>
-              <li><a href="#domains">Web3 & Protocols</a></li>
-              <li><a href="#domains">AI & Machine Learning</a></li>
-              <li><a href="#domains">Cyber Security</a></li>
-              <li><a href="#domains">App Engineering</a></li>
-              <li><a href="#domains">Open Source</a></li>
+              <li><a href="/#domains">Web2 & Cloud</a></li>
+              <li><a href="/#domains">Web3 & Protocols</a></li>
+              <li><a href="/#domains">AI & Machine Learning</a></li>
+              <li><a href="/#domains">Cyber Security</a></li>
+              <li><a href="/#domains">App Engineering</a></li>
+              <li><a href="/#domains">Open Source</a></li>
             </ul>
           </div>
           
           <div className="footer-links-group">
             <h4 className="footer-title">Resources</h4>
             <ul className="footer-list">
-              <li><a href="#knowledge">Roadmaps</a></li>
-              <li><a href="#knowledge">Technical Whitepapers</a></li>
-              <li><a href="#knowledge">Boilerplates</a></li>
-              <li><a href="#challenges">Leaderboards</a></li>
-              <li><a href="#events">Upcoming Sprints</a></li>
+              <li><a href="/#knowledge">Roadmaps</a></li>
+              <li><a href="/#knowledge">Technical Whitepapers</a></li>
+              <li><a href="/#knowledge">Boilerplates</a></li>
+              <li><a href="/#challenges">Leaderboards</a></li>
+              <li><Link to="/events">Upcoming Sprints</Link></li>
             </ul>
           </div>
           
           <div className="footer-links-group">
             <h4 className="footer-title">Platform</h4>
             <ul className="footer-list">
-              <li><a href="#about">About Us</a></li>
+              <li><a href="/#about">About Us</a></li>
               <li><Link to="/legacy">Our Legacy</Link></li>
-              <li><a href="#sponsors">Industry Sponsors</a></li>
-              <li><a href="#contact">Contact Core Team</a></li>
-              <li><a href="#guidelines">Code of Conduct</a></li>
+              <li><a href="/#sponsors">Industry Sponsors</a></li>
+              <li><a href="/#contact">Contact Core Team</a></li>
+              <li><a href="/#about">Code of Conduct</a></li>
             </ul>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function Footer() {
             <span className="footer-join-label">Ready to Elevate?</span>
             <span className="footer-join-desc">Connect with mentors and build breakthrough software.</span>
           </div>
-          <a href="#join" className="btn btn-primary" id="footer-join-btn">
+          <a href="https://discord.com" target="_blank" rel="noreferrer" className="btn btn-primary" id="footer-join-btn">
             <span>Join Discord</span>
             <ArrowUpRight size={14} />
           </a>

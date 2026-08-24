@@ -40,6 +40,7 @@ export function useLenis() {
     });
 
     lenisRef.current = lenis;
+    window.lenis = lenis;
 
     // Sync Lenis with GSAP ScrollTrigger so scroll-triggered animations
     // fire at the correct scroll positions (without this, ScrollTrigger uses
@@ -55,6 +56,7 @@ export function useLenis() {
       gsap.ticker.remove(onTick);
       lenis.destroy();
       lenisRef.current = null;
+      window.lenis = null;
     };
   }, []);
 

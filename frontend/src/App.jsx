@@ -11,16 +11,65 @@ import LogoReveal from './components/motion/LogoReveal';
 import { useLenis } from './hooks/useLenis';
 import LoginPage from './pages/Login/LoginPage';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
+import EventsPage from './pages/Events/EventsPage';
 
 /* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
 const LegacyPage = lazy(() => import('./pages/Legacy/LegacyPage'));
 
-/* ── Scroll to top on route change ────────────────────────────────── */
-function ScrollToTop() {
-  const { pathname } = useLocation();
+
+/* ── Scroll to hash or top on route change ────────────────────────── */
+function ScrollToHashOrTop({ lenisRef }) {
+  const location = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    const hash = location.hash;
+    if (hash) {
+      const id = hash.replace('#', '');
+      let checkCount = 0;
+      const maxChecks = 20;
+
+      const scrollToTarget = () => {
+        const target = document.getElementById(id);
+        if (!target) {
+          if (checkCount < maxChecks) {
+            checkCount++;
+            setTimeout(scrollToTarget, 60);
+          }
+          return;
+        }
+
+        // Trigger Lenis resize to ensure scroll bounds & heights are fresh
+        if (lenisRef?.current) {
+          lenisRef.current.resize();
+          lenisRef.current.scrollTo(target, {
+            offset: -85,
+            duration: 1.0,
+            immediate: false,
+          });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // As images/fonts/grids above target expand dynamically, verify & re-align
+        if (checkCount < maxChecks) {
+          checkCount++;
+          setTimeout(() => {
+            const rect = target.getBoundingClientRect();
+            // If target is more than 35px away from desired top offset (80px from top)
+            if (Math.abs(rect.top - 85) > 35) {
+              scrollToTarget();
+            }
+          }, 180);
+        }
+      };
+
+      const timer = setTimeout(scrollToTarget, 80);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash, lenisRef]);
+
   return null;
 }
 
@@ -28,30 +77,38 @@ function AppContent() {
   // ── Lenis smooth scroll (spring inertia + GSAP sync) ──────────────────
   const lenisRef = useLenis();
 
-  // ── Smooth anchor scrolling for all hash links ─────────────────────────
+  // ── Smooth anchor scrolling for in-page hash links ─────────────────────
   useEffect(() => {
     const handleAnchorClick = (e) => {
-      const anchor = e.target.closest('a[href^="#"]');
+      const anchor = e.target.closest('a[href^="#"], a[href^="/#"]');
       if (!anchor) return;
 
-      const id = anchor.getAttribute('href').slice(1);
+      const href = anchor.getAttribute('href');
+      const hash = href.includes('#') ? href.substring(href.indexOf('#')) : '';
+      if (!hash) return;
+
+      const id = hash.slice(1);
       if (!id) return;
 
-      const target = document.getElementById(id);
-      if (!target) return;
+      if (window.location.pathname === '/') {
+        const target = document.getElementById(id);
+        if (!target) return;
 
-      e.preventDefault();
+        e.preventDefault();
 
-      if (lenisRef.current) {
-        // Use Lenis's scrollTo for perfectly smooth anchor navigation
-        lenisRef.current.scrollTo(target, {
-          offset: -80, // account for fixed navbar height
-          duration: 1.4,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        });
-      } else {
-        // Fallback: native smooth scroll
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(target, {
+            offset: -80,
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          });
+        } else {
+          const navOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+        window.history.pushState(null, '', `/#${id}`);
       }
     };
 
@@ -101,7 +158,7 @@ function AppContent() {
         {showIntro && <LogoReveal onComplete={() => setShowIntro(false)} logoSrc="/logo.jpg" />}
       </AnimatePresence>
 
-      <ScrollToTop />
+      <ScrollToHashOrTop lenisRef={lenisRef} />
 
       <div className="app-container">
         <Navbar />
@@ -109,6 +166,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/teams" element={<Teams />} />
+            <Route path="/events" element={<EventsPage />} />
             <Route
               path="/legacy"
               element={
@@ -121,6 +179,7 @@ function AppContent() {
             <Route path="/login/admin"   element={<LoginPage role="admin" />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Routes>
+
         </main>
         <Footer />
       </div>

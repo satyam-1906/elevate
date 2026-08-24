@@ -49,3 +49,37 @@ exports.deleteEvent = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error while deleting event' });
   }
 };
+
+// PUT update event by id
+exports.updateEvent = async (req, res) => {
+  try {
+    const { title, date, description } = req.body;
+    const updateData = {};
+
+    if (title !== undefined) updateData.title = title;
+    if (date !== undefined) updateData.date = new Date(date);
+    if (description !== undefined) updateData.description = description;
+    if (req.file) {
+      updateData.imageUrl = req.file.path; // Cloudinary URL
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      req.params.id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    return res.status(200).json({
+      message: 'Event updated successfully',
+      event: updatedEvent,
+    });
+  } catch (error) {
+    console.error('Error updating event:', error);
+    return res.status(500).json({ error: 'Internal server error while updating event' });
+  }
+};
+

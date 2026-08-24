@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Globe, 
   Layers, 
@@ -24,27 +24,28 @@ import './Navbar.css';
 const navItems = [
   {
     label: 'Domains',
-    href: '#domains',
+    href: '/#domains',
     dropdown: [
-      { Icon: Globe, title: 'Web2', desc: 'Full-stack web & scalable cloud architecture' },
-      { Icon: Layers, title: 'Web3', desc: 'Blockchain protocols & smart contracts' },
-      { Icon: Cpu, title: 'AI / ML', desc: 'Neural networks, LLMs & computer vision' },
-      { Icon: ShieldCheck, title: 'Cyber Security', desc: 'Penetration testing & cryptography' },
-      { Icon: Smartphone, title: 'App Dev', desc: 'Cross-platform iOS & Android engineering' },
-      { Icon: GitBranch, title: 'Open Source', desc: 'Collaborative development & tooling' },
+      { Icon: Globe, title: 'Web2', desc: 'Full-stack web & scalable cloud architecture', href: '/#domains' },
+      { Icon: Layers, title: 'Web3', desc: 'Blockchain protocols & smart contracts', href: '/#domains' },
+      { Icon: Cpu, title: 'AI / ML', desc: 'Neural networks, LLMs & computer vision', href: '/#domains' },
+      { Icon: ShieldCheck, title: 'Cyber Security', desc: 'Penetration testing & cryptography', href: '/#domains' },
+      { Icon: Smartphone, title: 'App Dev', desc: 'Cross-platform iOS & Android engineering', href: '/#domains' },
+      { Icon: GitBranch, title: 'Open Source', desc: 'Collaborative development & tooling', href: '/#domains' },
     ],
   },
   { label: 'Legacy', href: '/legacy', isRoute: true },
   { label: 'Teams', href: '/teams', isRoute: true },
-  { label: 'Events', href: '#events' },
-  { label: 'Sponsors', href: '#sponsors' },
+  { label: 'Events', href: '/events', isRoute: true },
+  { label: 'Sponsors', href: '/#sponsors' },
+
   {
     label: 'Knowledge Hub',
-    href: '#knowledge',
+    href: '/#knowledge',
     dropdown: [
-      { Icon: Compass, title: 'Roadmaps', desc: 'Structured zero-to-hero curriculum' },
-      { Icon: BookOpen, title: 'Tutorials', desc: 'In-depth engineering write-ups' },
-      { Icon: Trophy, title: 'Challenges', desc: 'Compete on leaderboards & win bounties' },
+      { Icon: Compass, title: 'Roadmaps', desc: 'Structured zero-to-hero curriculum', href: '/#knowledge' },
+      { Icon: BookOpen, title: 'Tutorials', desc: 'In-depth engineering write-ups', href: '/#knowledge' },
+      { Icon: Trophy, title: 'Challenges', desc: 'Compete on leaderboards & win bounties', href: '/#challenges' },
     ],
   },
 ];
@@ -57,6 +58,7 @@ export default function Navbar() {
   const timerRef = useRef(null);
   const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => { logout(); navigate('/'); setUserMenuOpen(false); };
 
@@ -75,6 +77,37 @@ export default function Navbar() {
     timerRef.current = setTimeout(() => setActiveDropdown(null), 140); 
   };
 
+  const handleSectionClick = (e, href) => {
+    if (!href) return;
+    const hashIndex = href.indexOf('#');
+    if (hashIndex !== -1) {
+      const hash = href.substring(hashIndex);
+      const targetId = hash.replace('#', '');
+
+      if (location.pathname === '/') {
+        e.preventDefault();
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          if (window.lenis) {
+            window.lenis.scrollTo(elem, {
+              offset: -80,
+              duration: 1.2,
+              immediate: false,
+            });
+          } else {
+            elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          window.history.pushState(null, '', `/#${targetId}`);
+        }
+      } else {
+        e.preventDefault();
+        navigate(`/#${targetId}`);
+      }
+    }
+    setMobileOpen(false);
+    setActiveDropdown(null);
+  };
+
   return (
     <>
       {/* Top Ambient Glow behind Navbar (Flowbase Image 2) */}
@@ -84,10 +117,15 @@ export default function Navbar() {
         <div className={`navbar-pill ${mobileOpen ? 'mobile-open' : ''}`}>
 
           {/* Logo with Space Grotesk font */}
-          <a href="/" className="nav-logo">
+          <Link to="/" className="nav-logo" onClick={(e) => {
+            if (location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}>
             <img src="/logo.jpg" alt="Elevate Logo" className="nav-logo-img" />
             <span className="nav-logo-text brand-font">Elevate</span>
-          </a>
+          </Link>
 
           {/* Nav Links */}
           <nav className="nav-links" aria-label="Main navigation">
@@ -108,6 +146,7 @@ export default function Navbar() {
                 ) : (
                   <a
                     href={item.href}
+                    onClick={(e) => handleSectionClick(e, item.href)}
                     className={`nav-link ${activeDropdown === item.label ? 'active' : ''}`}
                   >
                     {item.label}
@@ -128,8 +167,13 @@ export default function Navbar() {
                     onMouseLeave={closeDrop}
                   >
                     <div className="dropdown-card glass">
-                      {item.dropdown.map(({ Icon, title, desc }) => (
-                        <a key={title} href={`#${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`} className="drop-item">
+                      {item.dropdown.map(({ Icon, title, desc, href }) => (
+                        <a
+                          key={title}
+                          href={href || `/#${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
+                          onClick={(e) => handleSectionClick(e, href || `/#${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`)}
+                          className="drop-item"
+                        >
                           <div className="drop-item-icon-wrapper">
                             <Icon size={17} className="drop-icon" />
                           </div>
@@ -199,14 +243,23 @@ export default function Navbar() {
                   {item.label}
                 </Link>
               ) : (
-                <a href={item.href} className="mob-link" onClick={() => setMobileOpen(false)}>
+                <a
+                  href={item.href}
+                  className="mob-link"
+                  onClick={(e) => handleSectionClick(e, item.href)}
+                >
                   {item.label}
                 </a>
               )}
               {item.dropdown && (
                 <div className="mob-sub">
-                  {item.dropdown.map(({ Icon, title }) => (
-                    <a key={title} href="#" className="mob-sub-link" onClick={() => setMobileOpen(false)}>
+                  {item.dropdown.map(({ Icon, title, href }) => (
+                    <a
+                      key={title}
+                      href={href || '#'}
+                      className="mob-sub-link"
+                      onClick={(e) => handleSectionClick(e, href || '#')}
+                    >
                       <Icon size={14} />
                       <span>{title}</span>
                     </a>
@@ -215,7 +268,11 @@ export default function Navbar() {
               )}
             </div>
           ))}
-          <a href="#join" className="btn btn-primary mob-cta" onClick={() => setMobileOpen(false)}>
+          <a
+            href="/#contact"
+            className="btn btn-primary mob-cta"
+            onClick={(e) => handleSectionClick(e, '/#contact')}
+          >
             <span>Join Community</span>
             <ArrowRight size={14} />
           </a>

@@ -4,7 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import AdminGuard from '../AdminGuard';
 import {
   LayoutDashboard, CalendarDays, Image, LogOut, Upload,
-  Trash2, Plus, X, CheckCircle, AlertCircle, Loader2
+  Trash2, Plus, X, CheckCircle, AlertCircle, Loader2, Edit3, Eye, Info
 } from 'lucide-react';
 import './AdminDashboard.css';
 
@@ -20,10 +20,13 @@ function useApi(token) {
   const post = (path, formData) =>
     fetch(`${API}${path}`, { method: 'POST', headers, body: formData }).then(r => r.json());
 
+  const put = (path, formData) =>
+    fetch(`${API}${path}`, { method: 'PUT', headers, body: formData }).then(r => r.json());
+
   const del = (path) =>
     fetch(`${API}${path}`, { method: 'DELETE', headers }).then(r => r.json());
 
-  return { get, post, del };
+  return { get, post, put, del };
 }
 
 /* ── Toast notification ──────────────────────────────────────────────────── */
@@ -42,6 +45,25 @@ function Toast({ toast, onClose }) {
   );
 }
 
+/* ── Helper: validate image file ─────────────────────────────────────────── */
+function validateImageFile(file) {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  if (!allowedTypes.includes(file.type)) {
+    return { error: 'Invalid format. Only JPG, PNG, and WebP images are allowed.' };
+  }
+  // 5MB limit
+  const maxBytes = 5 * 1024 * 1024;
+  if (file.size > maxBytes) {
+    return { error: `File size (${(file.size / (1024 * 1024)).toFixed(2)} MB) exceeds maximum allowed limit of 5 MB.` };
+  }
+  // Warning if > 2MB
+  let warning = null;
+  if (file.size > 2 * 1024 * 1024) {
+    warning = `File is ${(file.size / (1024 * 1024)).toFixed(1)} MB. For optimal page speed, 1–2 MB is recommended.`;
+  }
+  return { error: null, warning };
+}
+
 /* ── Event Form (create) ─────────────────────────────────────────────────── */
 function EventForm({ token, onCreated }) {
   const { post } = useApi(token);
@@ -50,11 +72,22 @@ function EventForm({ token, onCreated }) {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState('');
+  const [warning, setWarning] = useState('');
   const fileRef               = useRef();
 
   const handleFile = (e) => {
     const f = e.target.files[0];
     if (!f) return;
+    const check = validateImageFile(f);
+    if (check.error) {
+      setError(check.error);
+      setWarning('');
+      setFile(null);
+      setPreview(null);
+      return;
+    }
+    setError('');
+    setWarning(check.warning || '');
     setFile(f);
     setPreview(URL.createObjectURL(f));
   };
@@ -72,7 +105,7 @@ function EventForm({ token, onCreated }) {
       const data = await post('/events', fd);
       if (data.error) throw new Error(data.error);
       setForm({ title: '', date: '', description: '' });
-      setFile(null); setPreview(null);
+      setFile(null); setPreview(null); setWarning('');
       onCreated(data.event);
     } catch (err) {
       setError(err.message);
@@ -90,12 +123,12 @@ function EventForm({ token, onCreated }) {
         <div className="form-field full">
           <label>Event Title *</label>
           <input value={form.title} onChange={e => setForm(p => ({ ...p, title: e.target.value }))}
-            placeholder="e.g. Web3 Hackathon 2025" className="form-input" />
+            placeholder="e.g. Web3 & AI Hackathon 2026" className="form-input" />
         </div>
 
         {/* Date */}
         <div className="form-field">
-          <label>Date *</label>
+          <label>Event Date *</label>
           <input type="date" value={form.date} onChange={e => setForm(p => ({ ...p, date: e.target.value }))}
             className="form-input" />
         </div>
@@ -105,30 +138,36 @@ function EventForm({ token, onCreated }) {
           <label>Description</label>
           <textarea rows={3} value={form.description}
             onChange={e => setForm(p => ({ ...p, description: e.target.value }))}
-            placeholder="Brief description of the event..." className="form-input" />
+            placeholder="Event highlights, rules, schedule and prizes..." className="form-input" />
         </div>
 
         {/* Image upload */}
         <div className="form-field full">
-          <label>Cover Image (Cloudinary upload)</label>
+          <div className="upload-header">
+            <label>Cover Image (Cloudinary)</label>
+            <span className="upload-limits-note">Ideal: 1–2 MB | Max: 5 MB | Max Res: ~1920×1080</span>
+          </div>
           <div className="upload-area" onClick={() => fileRef.current.click()}>
             {preview
               ? <img src={preview} alt="preview" className="upload-preview" />
               : <>
                   <Upload size={28} className="upload-icon" />
-                  <p>Click to select an image (JPG, PNG, WebP)</p>
-                  <span className="upload-hint">Uploads directly to Cloudinary</span>
+                  <p>Click or drag to select cover image</p>
+                  <span className="upload-hint">Formats: JPG, PNG, WebP (Max 5MB)</span>
                 </>}
             <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp"
               style={{ display: 'none' }} onChange={handleFile} />
           </div>
           {file && (
             <div className="upload-filename">
-              <span>{file.name}</span>
-              <button type="button" onClick={() => { setFile(null); setPreview(null); }}>
+              <span>{file.name} ({(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
+              <button type="button" onClick={() => { setFile(null); setPreview(null); setWarning(''); }}>
                 <X size={14} />
               </button>
             </div>
+          )}
+          {warning && (
+            <p className="form-warning"><Info size={14} /> {warning}</p>
           )}
         </div>
       </div>
@@ -137,9 +176,155 @@ function EventForm({ token, onCreated }) {
 
       <button type="submit" className="btn btn-primary submit-btn" disabled={loading}>
         {loading ? <Loader2 size={16} className="spin" /> : <Plus size={16} />}
-        {loading ? 'Creating...' : 'Create Event'}
+        {loading ? 'Creating Event...' : 'Create Event'}
       </button>
     </form>
+  );
+}
+
+/* ── Edit Event Modal ────────────────────────────────────────────────────── */
+function EditEventModal({ event, token, onClose, onUpdated }) {
+  const { put } = useApi(token);
+  const [form, setForm] = useState({
+    title: event.title || '',
+    date: event.date ? new Date(event.date).toISOString().split('T')[0] : '',
+    description: event.description || '',
+  });
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(event.imageUrl || null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [warning, setWarning] = useState('');
+  const fileRef = useRef();
+
+  const handleFile = (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const check = validateImageFile(f);
+    if (check.error) {
+      setError(check.error);
+      setWarning('');
+      return;
+    }
+    setError('');
+    setWarning(check.warning || '');
+    setFile(f);
+    setPreview(URL.createObjectURL(f));
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    if (!form.title || !form.date) {
+      setError('Title and date are required');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      const fd = new FormData();
+      fd.append('title', form.title);
+      fd.append('date', form.date);
+      fd.append('description', form.description);
+      if (file) fd.append('image', file);
+
+      const data = await put(`/events/${event._id}`, fd);
+      if (data.error) throw new Error(data.error);
+      onUpdated(data.event);
+      onClose();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="modal-backdrop">
+      <div className="modal-content glass">
+        <div className="modal-header">
+          <h3 className="modal-title"><Edit3 size={18} /> Edit Event</h3>
+          <button className="modal-close" onClick={onClose}><X size={18} /></button>
+        </div>
+
+        <form onSubmit={handleUpdate} className="modal-form">
+          <div className="form-field">
+            <label>Event Title *</label>
+            <input
+              value={form.title}
+              onChange={e => setForm(p => ({ ...p, title: e.target.value }))}
+              className="form-input"
+              required
+            />
+          </div>
+
+          <div className="form-field">
+            <label>Event Date *</label>
+            <input
+              type="date"
+              value={form.date}
+              onChange={e => setForm(p => ({ ...p, date: e.target.value }))}
+              className="form-input"
+              required
+            />
+          </div>
+
+          <div className="form-field">
+            <label>Description</label>
+            <textarea
+              rows={3}
+              value={form.description}
+              onChange={e => setForm(p => ({ ...p, description: e.target.value }))}
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-field">
+            <div className="upload-header">
+              <label>Cover Image</label>
+              <span className="upload-limits-note">Ideal: 1–2 MB | Max: 5 MB</span>
+            </div>
+            <div className="upload-area edit-upload-area" onClick={() => fileRef.current.click()}>
+              {preview ? (
+                <img src={preview} alt="preview" className="upload-preview" />
+              ) : (
+                <>
+                  <Upload size={24} className="upload-icon" />
+                  <p>Click to replace cover image</p>
+                </>
+              )}
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                style={{ display: 'none' }}
+                onChange={handleFile}
+              />
+            </div>
+            {file && (
+              <div className="upload-filename">
+                <span>New image: {file.name} ({(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                <button type="button" onClick={() => { setFile(null); setPreview(event.imageUrl || null); setWarning(''); }}>
+                  <X size={14} />
+                </button>
+              </div>
+            )}
+            {warning && <p className="form-warning"><Info size={14} /> {warning}</p>}
+          </div>
+
+          {error && <p className="form-error"><AlertCircle size={14} /> {error}</p>}
+
+          <div className="modal-actions">
+            <button type="button" className="btn btn-outline" onClick={onClose} disabled={loading}>
+              Cancel
+            </button>
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? <Loader2 size={16} className="spin" /> : <CheckCircle size={16} />}
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 
@@ -148,6 +333,7 @@ function EventsList({ token, refresh, setRefresh, addToast }) {
   const { get, del } = useApi(token);
   const [events,  setEvents]  = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingEvent, setEditingEvent] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -158,41 +344,84 @@ function EventsList({ token, refresh, setRefresh, addToast }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh]);
 
-  const deleteEvent = async (id) => {
-    if (!window.confirm('Delete this event?')) return;
+  const deleteEvent = async (id, title) => {
+    if (!window.confirm(`Are you sure you want to delete event "${title}"?`)) return;
     try {
       await del(`/events/${id}`);
       setEvents(prev => prev.filter(e => e._id !== id));
-      addToast({ type: 'success', message: 'Event deleted.' });
+      addToast({ type: 'success', message: `Event "${title}" deleted.` });
     } catch {
       addToast({ type: 'error', message: 'Failed to delete event.' });
     }
+  };
+
+  const handleUpdated = (updatedEv) => {
+    setEvents(prev => prev.map(e => (e._id === updatedEv._id ? updatedEv : e)));
+    addToast({ type: 'success', message: `Event "${updatedEv.title}" updated successfully.` });
+    setRefresh(r => r + 1);
   };
 
   if (loading) return <div className="loading-state"><Loader2 size={24} className="spin" /> Loading events…</div>;
   if (!events.length) return <div className="empty-state">No events yet. Create one above!</div>;
 
   return (
-    <div className="events-grid">
-      {events.map(ev => (
-        <div key={ev._id} className="event-card glass">
-          {ev.imageUrl
-            ? <img src={ev.imageUrl} alt={ev.title} className="event-card-img" />
-            : <div className="event-card-no-img"><Image size={32} /></div>}
-          <div className="event-card-body">
-            <h4 className="event-card-title">{ev.title}</h4>
-            <div className="event-card-date">
-              <CalendarDays size={13} />
-              {new Date(ev.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+    <>
+      <div className="events-grid">
+        {events.map(ev => {
+          const evDate = new Date(ev.date);
+          const now = new Date();
+          const isToday = evDate.toDateString() === now.toDateString();
+          const isPast = evDate < now && !isToday;
+          const status = isToday ? 'Ongoing' : isPast ? 'Past' : 'Upcoming';
+          const statusClass = isToday ? 'status-ongoing' : isPast ? 'status-past' : 'status-upcoming';
+
+          return (
+            <div key={ev._id} className="event-card glass">
+              {ev.imageUrl
+                ? <img src={ev.imageUrl} alt={ev.title} className="event-card-img" />
+                : <div className="event-card-no-img"><Image size={32} /></div>}
+              
+              <div className={`event-status-badge ${statusClass}`}>{status}</div>
+
+              <div className="event-card-body">
+                <h4 className="event-card-title">{ev.title}</h4>
+                <div className="event-card-date">
+                  <CalendarDays size={13} />
+                  {evDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </div>
+                {ev.description && <p className="event-card-desc">{ev.description}</p>}
+              </div>
+
+              <div className="event-card-actions">
+                <button
+                  className="event-btn edit"
+                  onClick={() => setEditingEvent(ev)}
+                  title="Edit event"
+                >
+                  <Edit3 size={14} /> Edit
+                </button>
+                <button
+                  className="event-btn delete"
+                  onClick={() => deleteEvent(ev._id, ev.title)}
+                  title="Delete event"
+                >
+                  <Trash2 size={14} /> Delete
+                </button>
+              </div>
             </div>
-            {ev.description && <p className="event-card-desc">{ev.description}</p>}
-          </div>
-          <button className="event-delete-btn" onClick={() => deleteEvent(ev._id)} title="Delete event">
-            <Trash2 size={15} />
-          </button>
-        </div>
-      ))}
-    </div>
+          );
+        })}
+      </div>
+
+      {editingEvent && (
+        <EditEventModal
+          event={editingEvent}
+          token={token}
+          onClose={() => setEditingEvent(null)}
+          onUpdated={handleUpdated}
+        />
+      )}
+    </>
   );
 }
 
@@ -209,12 +438,12 @@ function Sidebar({ active, setActive, onLogout, user }) {
         <img src="/logo.jpg" alt="Elevate" className="sidebar-logo" />
         <div>
           <span className="sidebar-title">Elevate</span>
-          <span className="sidebar-role">Admin Panel</span>
+          <span className="sidebar-role">Admin Portal</span>
         </div>
       </div>
 
       <nav className="sidebar-nav">
-        <div className="sidebar-section-label">Content</div>
+        <div className="sidebar-section-label">Management</div>
         {items.map(({ id, label, Icon }) => (
           <button
             key={id}
@@ -255,7 +484,7 @@ function Dashboard() {
   const handleLogout = () => { logout(); navigate('/'); };
 
   const handleEventCreated = (ev) => {
-    addToast({ type: 'success', message: `Event "${ev.title}" created!` });
+    addToast({ type: 'success', message: `Event "${ev.title}" created successfully!` });
     setRefresh(r => r + 1);
   };
 
@@ -272,13 +501,13 @@ function Dashboard() {
             </h1>
             <p className="admin-page-sub">
               {active === 'events'
-                ? 'Create, view, and manage campus events with Cloudinary image uploads.'
-                : 'Browse all uploaded media assets.'}
+                ? 'Create, edit, delete, and manage campus events with Cloudinary image processing.'
+                : 'Browse and manage uploaded assets.'}
             </p>
           </div>
           <div className="admin-badge">
             <LayoutDashboard size={14} />
-            <span>Admin Dashboard</span>
+            <span>Admin Clearance</span>
           </div>
         </div>
 
@@ -287,7 +516,7 @@ function Dashboard() {
           <>
             <EventForm token={token} onCreated={handleEventCreated} />
             <div className="section-divider">
-              <h3 className="section-label">All Events</h3>
+              <h3 className="section-label">All Published Events</h3>
             </div>
             <EventsList token={token} refresh={refresh} setRefresh={setRefresh} addToast={addToast} />
           </>
@@ -296,7 +525,7 @@ function Dashboard() {
         {active === 'media' && (
           <div className="placeholder-panel glass">
             <Image size={40} className="placeholder-icon" />
-            <p>Media library coming soon.</p>
+            <p>Media library is under development.</p>
           </div>
         )}
       </main>
@@ -318,3 +547,4 @@ export default function AdminDashboard() {
     </AdminGuard>
   );
 }
+

@@ -4,6 +4,12 @@ const User = require('../models/User');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+// List of authorized admin emails
+const ADMIN_EMAILS = [
+  'bt25cse159@iiitn.ac.in',
+  ...(process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',').map(e => e.trim().toLowerCase()) : [])
+];
+
 exports.googleLogin = async (req, res) => {
   try {
     const { token, role } = req.body; // frontend passes the google token and requested role string (e.g. 'admin' or 'student')
@@ -21,19 +27,26 @@ exports.googleLogin = async (req, res) => {
       return res.status(403).json({ error: 'Access denied. Please use your @iiitn.ac.in email address.' });
     }
     
+    const normalizedEmail = email.toLowerCase();
+    const isAuthorizedAdmin = ADMIN_EMAILS.includes(normalizedEmail);
+
     // Check if user exists
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email: normalizedEmail });
     if (!user) {
-      // First time login - Create user based on requested role
-      // Note: If you want to strictly restrict who is admin, 
-      // you could verify the email against a pre-approved list here.
+      // First time login - Create user
       user = await User.create({
-        email,
+        email: normalizedEmail,
         name,
         picture,
-        role: role === 'admin' ? 'admin' : 'student'
+        role: isAuthorizedAdmin ? 'admin' : (role === 'admin' ? 'admin' : 'student')
       });
     } else {
+      // If user is in the authorized admin list, upgrade/ensure admin role
+      if (isAuthorizedAdmin && user.role !== 'admin') {
+        user.role = 'admin';
+        await user.save();
+      }
+
       // If user exists, but they tried to log in on the admin portal when they are a student
       if (role === 'admin' && user.role !== 'admin') {
         return res.status(403).json({ error: 'Access denied. You do not have admin privileges.' });

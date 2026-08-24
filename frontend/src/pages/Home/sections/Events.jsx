@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Clock, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import StaggeredText from '../../../components/motion/StaggeredText';
 import SpeedingText from '../../../components/motion/SpeedingText';
@@ -51,11 +52,12 @@ export default function Events() {
               <StaggeredText text="Upcoming sprints and workshops." />
             </h2>
           </div>
-          <a href="#events" className="btn btn-outline">
+          <Link to="/events" className="btn btn-outline">
             <span>Explore All Sprints</span>
             <ArrowRight size={14} />
-          </a>
+          </Link>
         </div>
+
 
         <div className="events-list">
           {upcomingEvents.map((event, i) => (
