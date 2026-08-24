@@ -2,12 +2,15 @@ import { useEffect, lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home/Home';
 import Footer from './components/layout/Footer';
 import Teams from './pages/Teams/Teams';
 import LogoReveal from './components/motion/LogoReveal';
 import { useLenis } from './hooks/useLenis';
+import LoginPage from './pages/Login/LoginPage';
+import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
 
 /* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
 const LegacyPage = lazy(() => import('./pages/Legacy/LegacyPage'));
@@ -114,6 +117,9 @@ function AppContent() {
                 </Suspense>
               }
             />
+            <Route path="/login/student" element={<LoginPage role="student" />} />
+            <Route path="/login/admin"   element={<LoginPage role="admin" />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />
@@ -125,9 +131,11 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider>
-        <AppContent />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <AppContent />
+        </ThemeProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

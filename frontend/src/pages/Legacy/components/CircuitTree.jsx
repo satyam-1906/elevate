@@ -89,7 +89,11 @@ export default function CircuitTree({ hierarchy, glowColor }) {
       });
     };
 
-    traverse(hierarchy);
+    if (Array.isArray(hierarchy)) {
+      hierarchy.forEach(traverse);
+    } else {
+      traverse(hierarchy);
+    }
     setPaths(newPaths);
   }, [hierarchy]);
 
@@ -153,7 +157,13 @@ export default function CircuitTree({ hierarchy, glowColor }) {
       
       {/* HTML Nodes */}
       <div className="circuit-html-layer" style={{ position: 'relative', zIndex: 1 }}>
-        {renderTree(hierarchy, 0)}
+        {Array.isArray(hierarchy) ? (
+          <div className="tree-children-row">
+            {hierarchy.map(child => renderTree(child, 0))}
+          </div>
+        ) : (
+          renderTree(hierarchy, 0)
+        )}
       </div>
     </div>
   );

@@ -246,7 +246,15 @@ export default function FloatingLines({
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
+    let renderer;
+    try {
+      renderer = new WebGLRenderer({ antialias: true, alpha: true });
+    } catch {
+      // WebGL not available – show a CSS gradient fallback instead of crashing
+      container.style.background =
+        'linear-gradient(135deg, #0a0a2e 0%, #1a0a3e 40%, #2d1b69 70%, #0a0a2e 100%)';
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';

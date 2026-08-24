@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Globe, 
   Layers, 
@@ -11,9 +11,14 @@ import {
   BookOpen, 
   Trophy,
   ChevronDown,
-  ArrowRight
+  ArrowRight,
+  LogIn,
+  LogOut,
+  LayoutDashboard,
+  User
 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
 const navItems = [
@@ -48,7 +53,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const timerRef = useRef(null);
+  const { user, isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => { logout(); navigate('/'); setUserMenuOpen(false); };
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -139,11 +149,35 @@ export default function Navbar() {
           {/* Actions */}
           <div className="nav-actions">
             <ThemeToggle />
-            <a href="#join" className="btn btn-primary nav-cta-btn" id="join-btn">
-              <span>Join Community</span>
-              <ArrowRight size={14} />
-            </a>
-            
+
+            {/* Auth button */}
+            {user ? (
+              <div className="nav-user-menu">
+                <button className="nav-user-btn" onClick={() => setUserMenuOpen(o => !o)}>
+                  <img src={user.picture || '/logo.jpg'} alt={user.name} className="nav-user-avatar" />
+                  <span className="nav-user-name">{user.name.split(' ')[0]}</span>
+                  <ChevronDown size={13} className={userMenuOpen ? 'open' : ''} />
+                </button>
+                {userMenuOpen && (
+                  <div className="nav-user-dropdown glass">
+                    {isAdmin && (
+                      <Link to="/admin/dashboard" className="user-drop-item" onClick={() => setUserMenuOpen(false)}>
+                        <LayoutDashboard size={14} /> Dashboard
+                      </Link>
+                    )}
+                    <button className="user-drop-item danger" onClick={handleLogout}>
+                      <LogOut size={14} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login/student" className="btn btn-primary nav-cta-btn" id="login-btn">
+                <LogIn size={14} />
+                <span>Login</span>
+              </Link>
+            )}
+
             {/* Mobile Hamburger */}
             <button
               className="hamburger-btn"
