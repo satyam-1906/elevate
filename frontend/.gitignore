@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Documentation & Guidelines
+Elevate_Knowledge_Hub.md
+elevate-guide.md
+
+# Environment variables
+.env
+.env.*
