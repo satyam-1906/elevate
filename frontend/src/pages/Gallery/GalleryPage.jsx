@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Camera, Sparkles, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import ParticleBackground from '../../components/common/ParticleBackground';
 import './GalleryPage.css';
 
 const images = [
@@ -10,10 +11,6 @@ const images = [
   { id: 4, src: '/gallery/20250918_180725.jpg', title: 'Closing Keynote', year: '2025' },
 ];
 
-/* Floating particle component */
-function Particle({ style }) {
-  return <div className="gallery-particle" style={style} />;
-}
 
 /* Lightbox */
 function Lightbox({ images, current, onClose, onPrev, onNext }) {
@@ -121,17 +118,8 @@ export default function GalleryPage() {
 
   return (
     <div className="gallery-page" ref={containerRef}>
-      {/* Floating Particles */}
-      <div className="gallery-particles" aria-hidden="true">
-        {particles.map((p, i) => <Particle key={i} style={p} />)}
-      </div>
-
-      {/* Ambient mesh blobs */}
-      <div className="gallery-ambient-mesh" aria-hidden="true">
-        <div className="gallery-blob gallery-blob-1" />
-        <div className="gallery-blob gallery-blob-2" />
-        <div className="gallery-blob gallery-blob-3" />
-      </div>
+      {/* Shared rising-particle background */}
+      <ParticleBackground count={28} intensity="medium" />
 
       {/* ── HEADER ── */}
       <motion.div className="gallery-header-section" style={{ y: headerY }}>

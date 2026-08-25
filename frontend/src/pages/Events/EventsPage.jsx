@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import StaggeredText from '../../components/motion/StaggeredText';
 import { useAuth } from '../../context/AuthContext';
+import ParticleBackground from '../../components/common/ParticleBackground';
 import './EventsPage.css';
 
 const API = 'http://localhost:5000/api';
@@ -94,9 +95,7 @@ export default function EventsPage() {
 
   return (
     <div className="events-page">
-      {/* Background Ambience */}
-      <div className="events-bg-bloom events-bg-bloom-1" />
-      <div className="events-bg-bloom events-bg-bloom-2" />
+      <ParticleBackground count={26} intensity="medium" />
 
       <div className="container events-page-container">
         

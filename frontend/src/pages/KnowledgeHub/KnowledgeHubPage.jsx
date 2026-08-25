@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import StaggeredText from '../../components/motion/StaggeredText';
 import { knowledgeResources } from '../../data/knowledgeData';
+import ParticleBackground from '../../components/common/ParticleBackground';
 import './KnowledgeHubPage.css';
 
 export default function KnowledgeHubPage() {
@@ -123,8 +124,7 @@ export default function KnowledgeHubPage() {
 
   return (
     <div className="knowledge-page">
-      <div className="knowledge-bg-bloom knowledge-bg-bloom-1" />
-      <div className="knowledge-bg-bloom knowledge-bg-bloom-2" />
+      <ParticleBackground count={26} intensity="medium" />
 
       {/* Questionnaire Overlay */}
       {showQuestionnaire && (

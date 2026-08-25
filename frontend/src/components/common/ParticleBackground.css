@@ -1,0 +1,70 @@
+/* ─── Shared Particle + Ambient Blob Background ──────────────── */
+
+.particle-background {
+  position: fixed; /* fixed so it covers full viewport, even on scroll */
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── Particles ── */
+.pb-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160, 130, 255, 0.9) 0%, rgba(255, 80, 160, 0.5) 60%, transparent 100%);
+  animation: pb-rise linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes pb-rise {
+  0%   { transform: translateY(0)   translateX(0)                      scale(1);    opacity: 0; }
+  8%   {                                                                             opacity: 1; }
+  85%  {                                                                             opacity: 0.7; }
+  100% { transform: translateY(-110vh) translateX(var(--x-drift, 0px)) scale(0.55); opacity: 0; }
+}
+
+/* Intensity multipliers — control glow & count feel */
+.pb-intensity-low    .pb-particle { opacity: 0.45; filter: blur(1px); }
+.pb-intensity-medium .pb-particle { opacity: 0.65; filter: blur(0.5px); }
+.pb-intensity-high   .pb-particle { opacity: 0.85; filter: blur(0px); }
+
+/* ── Ambient Blobs ── */
+.pb-blob {
+  position: absolute;
+  border-radius: 50%;
+  animation: pb-drift ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.pb-blob-1 {
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(110, 85, 255, 0.28) 0%, transparent 68%);
+  top: -18%; left: 2%;
+  filter: blur(125px);
+  animation-duration: 22s;
+}
+
+.pb-blob-2 {
+  width: 540px; height: 540px;
+  background: radial-gradient(circle, rgba(255, 40, 130, 0.2) 0%, transparent 65%);
+  bottom: 4%; right: 0%;
+  filter: blur(130px);
+  animation-duration: 27s;
+  animation-delay: -7s;
+}
+
+.pb-blob-3 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(0, 210, 210, 0.14) 0%, transparent 65%);
+  top: 38%; left: 52%;
+  filter: blur(110px);
+  animation-duration: 19s;
+  animation-delay: -4s;
+}
+
+@keyframes pb-drift {
+  0%   { transform: translate(0, 0)     scale(1); }
+  50%  { transform: translate(35px, -55px) scale(1.1); }
+  100% { transform: translate(-28px, 42px) scale(0.92); }
+}

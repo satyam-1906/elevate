@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileCard from '../../components/common/ProfileCard';
 import { Users } from 'lucide-react';
 import StaggeredText from '../../components/motion/StaggeredText';
+import ParticleBackground from '../../components/common/ParticleBackground';
 import './Teams.css';
 import leadPic from '../../assets/images/Lead_elevate_2026.jpeg';
 import coleadPic from '../../assets/images/Co_lead_elevate_2026.jpg';
@@ -45,7 +46,8 @@ const teamData = {
 
 export default function Teams() {
   return (
-    <section id="teams-page" className="section team-section" style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: '80px' }}>
+    <section id="teams-page" className="section team-section" style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: '80px', position: 'relative' }}>
+      <ParticleBackground count={24} intensity="medium" />
       <div className="container teams-hero">
         <span className="section-tag">
           <Users size={13} />
