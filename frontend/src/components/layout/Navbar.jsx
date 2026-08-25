@@ -31,7 +31,7 @@ const navItems = [
       { Icon: Cpu, title: 'AI / ML', desc: 'Neural networks, LLMs & computer vision', href: '/#domains' },
       { Icon: ShieldCheck, title: 'Cyber Security', desc: 'Penetration testing & cryptography', href: '/#domains' },
       { Icon: Smartphone, title: 'App Dev', desc: 'Cross-platform iOS & Android engineering', href: '/#domains' },
-      { Icon: GitBranch, title: 'Open Source', desc: 'Collaborative development & tooling', href: '/#domains' },
+      { Icon: GitBranch, title: 'Open Source', desc: 'Collaborative development & tooling', href: '/domains/open-source' },
     ],
   },
   { label: 'Legacy', href: '/legacy', isRoute: true },
