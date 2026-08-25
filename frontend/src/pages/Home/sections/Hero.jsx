@@ -39,43 +39,46 @@ export default function Hero() {
       </div>
 
       <div className="container hero-container">
-        <div className="hero-content">
-          
-          {/* Staggered Text Title */}
-          <h1 className="hero-title">
-            <StaggeredText 
-              text="Models that think" 
-              className="hero-line-1"
-              delay={0.1}
-            />
-            <br />
-            <RotatingText className="hero-line-2" />
-          </h1>
+        <div className="hero-content-glass">
+          <div className="hero-content">
+            <div className="hero-top-row">
+              <div className="hero-top-left">
+                <h1 className="hero-title">
+                  <span className="hero-title-small">
+                    <StaggeredText text="Welcome to" delay={0.1} />
+                  </span>
+                  <span className="hero-title-large">
+                    <StaggeredText text="Elevate" delay={0.3} />
+                  </span>
+                </h1>
+              </div>
+            </div>
 
-          <p className="hero-subtitle">
-            Join the premier technical club. Build decentralized networks, train foundation AI models, 
-            secure critical infrastructure, and engineer breakthrough applications with industry-grade mentorship.
-          </p>
+            <p className="hero-subtitle">
+              Join the premier technical club. Build decentralized networks, train foundation AI models, 
+              secure critical infrastructure, and engineer breakthrough applications with industry-grade mentorship.
+            </p>
 
-          {/* Call to Actions */}
-          <div className="hero-ctas">
-            <a href="#join" className="btn btn-primary hero-btn-main">
-              <span>Join Elevate</span>
-              <ArrowRight size={16} />
-            </a>
-            <a href="#domains" className="btn btn-outline">
-              <Compass size={16} />
-              <span>Explore Domains</span>
-            </a>
-          </div>
+            {/* Call to Actions */}
+            <div className="hero-ctas">
+              <a href="#join" className="btn btn-primary hero-btn-main glow-effect">
+                <span>Join Elevate</span>
+                <ArrowRight size={18} />
+              </a>
+              <a href="#domains" className="btn btn-outline hero-btn-secondary">
+                <Compass size={18} />
+                <span>Explore Domains</span>
+              </a>
+            </div>
 
-          {/* Powered by / Tech Domains Row */}
-          <div className="hero-logos">
-            <p className="logos-label">POWERING INNOVATION ACROSS</p>
-            <div className="logos-row">
-              {['Web2 & Cloud', 'Web3 & Protocols', 'AI & Deep Learning', 'Cyber Security', 'Mobile Architecture', 'Open Source'].map(t => (
-                <span key={t} className="logo-tag">{t}</span>
-              ))}
+            {/* Powered by / Tech Domains Row */}
+            <div className="hero-logos">
+              <p className="logos-label">POWERING INNOVATION ACROSS</p>
+              <div className="logos-row">
+                {['Web2 & Cloud', 'Web3 & Protocols', 'AI & Deep Learning', 'Cyber Security', 'Mobile Architecture', 'Open Source'].map(t => (
+                  <span key={t} className="logo-tag">{t}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>

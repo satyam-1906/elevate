@@ -255,7 +255,7 @@ export default function FloatingLines({
         'linear-gradient(135deg, #0a0a2e 0%, #1a0a3e 40%, #2d1b69 70%, #0a0a2e 100%)';
       return;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(1); // Optimized for performance on high-DPI displays
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     container.appendChild(renderer.domElement);
