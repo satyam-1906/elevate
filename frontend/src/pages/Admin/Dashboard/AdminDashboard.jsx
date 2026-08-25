@@ -4,14 +4,15 @@ import { useAuth } from '../../../context/AuthContext';
 import AdminGuard from '../AdminGuard';
 import {
   LayoutDashboard, CalendarDays, Image, LogOut, Upload,
-  Trash2, Plus, X, CheckCircle, AlertCircle, Loader2, Edit3, Eye, Info
+  Trash2, Plus, X, CheckCircle, AlertCircle, Loader2, Edit3, Eye, Info, BookOpen
 } from 'lucide-react';
+import { ResourceForm, ResourcesList } from './AdminResources';
 import './AdminDashboard.css';
 
 const API = 'http://localhost:5000/api';
 
 /* ── API helper ──────────────────────────────────────────────────────────── */
-function useApi(token) {
+export function useApi(token) {
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   const get = (path) =>
@@ -46,7 +47,7 @@ function Toast({ toast, onClose }) {
 }
 
 /* ── Helper: validate image file ─────────────────────────────────────────── */
-function validateImageFile(file) {
+export function validateImageFile(file) {
   const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
   if (!allowedTypes.includes(file.type)) {
     return { error: 'Invalid format. Only JPG, PNG, and WebP images are allowed.' };
@@ -429,6 +430,7 @@ function EventsList({ token, refresh, setRefresh, addToast }) {
 function Sidebar({ active, setActive, onLogout, user }) {
   const items = [
     { id: 'events', label: 'Events',  Icon: CalendarDays },
+    { id: 'resources', label: 'Knowledge Hub', Icon: BookOpen },
     { id: 'media',  label: 'Media',   Icon: Image },
   ];
 
@@ -488,6 +490,11 @@ function Dashboard() {
     setRefresh(r => r + 1);
   };
 
+  const handleResourceCreated = (res) => {
+    addToast({ type: 'success', message: `Resource "${res.title}" created successfully!` });
+    setRefresh(r => r + 1);
+  };
+
   return (
     <div className="admin-layout">
       <Sidebar active={active} setActive={setActive} onLogout={handleLogout} user={user} />
@@ -497,11 +504,13 @@ function Dashboard() {
         <div className="admin-header">
           <div>
             <h1 className="admin-page-title">
-              {active === 'events' ? 'Event Management' : 'Media Library'}
+              {active === 'events' ? 'Event Management' : active === 'resources' ? 'Knowledge Hub' : 'Media Library'}
             </h1>
             <p className="admin-page-sub">
               {active === 'events'
                 ? 'Create, edit, delete, and manage campus events with Cloudinary image processing.'
+                : active === 'resources'
+                ? 'Manage resources, tutorials, and guides for the Knowledge Hub.'
                 : 'Browse and manage uploaded assets.'}
             </p>
           </div>
@@ -519,6 +528,16 @@ function Dashboard() {
               <h3 className="section-label">All Published Events</h3>
             </div>
             <EventsList token={token} refresh={refresh} setRefresh={setRefresh} addToast={addToast} />
+          </>
+        )}
+
+        {active === 'resources' && (
+          <>
+            <ResourceForm token={token} onCreated={handleResourceCreated} />
+            <div className="section-divider">
+              <h3 className="section-label">All Resources</h3>
+            </div>
+            <ResourcesList token={token} refresh={refresh} setRefresh={setRefresh} addToast={addToast} />
           </>
         )}
 

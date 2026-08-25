@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
   Search, 
@@ -15,14 +16,19 @@ import {
   User,
   Filter,
   ArrowRight,
-  Quote
+  Quote,
+  LayoutDashboard
 } from 'lucide-react';
 import StaggeredText from '../../components/motion/StaggeredText';
-import { knowledgeResources } from '../../data/knowledgeData';
+import { useAuth } from '../../context/AuthContext';
 import ParticleBackground from '../../components/common/ParticleBackground';
 import './KnowledgeHubPage.css';
 
 export default function KnowledgeHubPage() {
+  const { isAdmin } = useAuth();
+  const [resources, setResources] = useState([]);
+  const [loadingResources, setLoadingResources] = useState(true);
+
   const [showQuestionnaire, setShowQuestionnaire] = useState(() => {
     return !sessionStorage.getItem('knowledgeHubFormCompleted');
   });
@@ -44,6 +50,14 @@ export default function KnowledgeHubPage() {
 
   const domains = ['All', 'Web2', 'Web3', 'AI/ML', 'Cyber Security', 'App Development', 'Open Source'];
   const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/resources/all')
+      .then(res => res.json())
+      .then(data => setResources(Array.isArray(data) ? data : data.resources || []))
+      .catch(err => console.error('Failed to fetch resources:', err))
+      .finally(() => setLoadingResources(false));
+  }, []);
 
   const fetchQuote = async () => {
     setLoadingQuote(true);
@@ -109,18 +123,26 @@ export default function KnowledgeHubPage() {
   };
 
   const displayedResources = useMemo(() => {
-    return knowledgeResources.filter((res) => {
+    return resources.filter((res) => {
+      // Normal users only see published resources. Admins can see all.
+      if (!isAdmin && res.isPublished === false) return false;
+
+      const title = res.title || '';
+      const desc = res.description || '';
+      const tags = res.tags || [];
+
       const matchesSearch = searchQuery === '' || 
-        res.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        res.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        res.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
       
       const matchesDomain = activeDomain === 'All' || res.domain === activeDomain;
-      const matchesDifficulty = activeDifficulty === 'All' || res.difficulty.includes(activeDifficulty);
+      const resDiff = res.difficulty || '';
+      const matchesDifficulty = activeDifficulty === 'All' || resDiff.includes(activeDifficulty);
 
       return matchesSearch && matchesDomain && matchesDifficulty;
     });
-  }, [searchQuery, activeDomain, activeDifficulty]);
+  }, [searchQuery, activeDomain, activeDifficulty, resources, isAdmin]);
 
   return (
     <div className="knowledge-page">
@@ -185,6 +207,26 @@ export default function KnowledgeHubPage() {
           <p className="knowledge-main-desc">
             Explore highly curated, technical, and top-tier learning resources across multiple domains. Handpicked to accelerate your engineering journey.
           </p>
+
+          {/* Admin Shortcut Banner */}
+          {isAdmin && (
+            <div className="events-admin-banner glass" style={{ marginTop: '24px' }}>
+              <div className="events-admin-banner-left">
+                <div className="admin-status-pill">
+                  <ShieldCheck size={14} />
+                  <span>Admin Clearance</span>
+                </div>
+                <span className="events-admin-banner-text">
+                  Manage Knowledge Hub resources, tutorials, and content
+                </span>
+              </div>
+              <Link to="/admin/dashboard" className="events-admin-dashboard-link">
+                <LayoutDashboard size={15} />
+                <span>Open Admin Dashboard</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="knowledge-controls-bar glass">
@@ -241,7 +283,11 @@ export default function KnowledgeHubPage() {
           </div>
         </div>
 
-        {displayedResources.length === 0 ? (
+        {loadingResources ? (
+          <div className="knowledge-empty-card glass" style={{ padding: '40px' }}>
+            <div className="quote-loading-text">Loading resources...</div>
+          </div>
+        ) : displayedResources.length === 0 ? (
           <div className="knowledge-empty-card glass">
             <FileText size={48} className="empty-icon" />
             <h3>No resources found</h3>
@@ -250,31 +296,36 @@ export default function KnowledgeHubPage() {
         ) : (
           <div className="knowledge-grid-feed">
             {displayedResources.map((res) => (
-              <article key={res.id} className="knowledge-feed-card card glass">
+              <article key={res._id || res.id} className="knowledge-feed-card card glass">
                 <div className="knowledge-feed-body">
                   <div className="knowledge-feed-meta">
                     <span className="knowledge-domain-chip">
                       {getDomainIcon(res.domain)}
                       <span>{res.domain}</span>
                     </span>
-                    <span className="knowledge-type-chip">{res.type}</span>
-                    <span className="knowledge-difficulty-chip">{res.difficulty}</span>
+                    {(res.category || res.type) && <span className="knowledge-type-chip">{res.category || res.type}</span>}
+                    {res.difficulty && <span className="knowledge-difficulty-chip">{res.difficulty}</span>}
+                    {!res.isPublished && isAdmin && <span className="knowledge-type-chip" style={{background: 'rgba(239,68,68,0.2)'}}>Draft</span>}
                   </div>
 
                   <h3 className="knowledge-feed-title">{res.title}</h3>
                   <p className="knowledge-feed-description">{res.description}</p>
                   
                   <div className="knowledge-details">
-                    <div className="detail-item">
-                      <User size={13} /> <span>{res.author} {res.official && "(Official)"}</span>
-                    </div>
-                    <div className="detail-item">
-                      <Star size={13} /> <span>Elevate Rating: {res.rating}</span>
-                    </div>
+                    {(res.author || res.official) && (
+                      <div className="detail-item">
+                        <User size={13} /> <span>{res.author || 'Unknown'} {res.official && "(Official)"}</span>
+                      </div>
+                    )}
+                    {res.rating && (
+                      <div className="detail-item">
+                        <Star size={13} /> <span>Elevate Rating: {res.rating}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="knowledge-tags">
-                    {res.tags.map((tag, idx) => (
+                    {(res.tags || []).map((tag, idx) => (
                       <span key={idx} className="knowledge-tag">
                         <Tag size={10} />
                         {tag}
@@ -283,7 +334,17 @@ export default function KnowledgeHubPage() {
                   </div>
 
                   <div className="knowledge-feed-footer">
-                    {res.links.map((link, idx) => (
+                    {res.url ? (
+                      <a
+                        href={res.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary knowledge-cta-btn"
+                      >
+                        <span>Start Learning</span>
+                        <ExternalLink size={14} />
+                      </a>
+                    ) : res.links && res.links.map((link, idx) => (
                       <a
                         key={idx}
                         href={link.url}
