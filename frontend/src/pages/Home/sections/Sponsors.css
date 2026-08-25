@@ -97,13 +97,13 @@
 }
 
 @keyframes scrollUp {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
+  from { transform: translateY(0) translateZ(0); }
+  to   { transform: translateY(-50%) translateZ(0); }
 }
 
 @keyframes scrollDown {
-  from { transform: translateY(-50%); }
-  to   { transform: translateY(0); }
+  from { transform: translateY(-50%) translateZ(0); }
+  to   { transform: translateY(0) translateZ(0); }
 }
 
 /* ─── Individual Sponsor Card ─── */

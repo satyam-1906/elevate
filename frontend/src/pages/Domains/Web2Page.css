@@ -288,6 +288,7 @@
   color: #1e293b;
   font-weight: 700;
   letter-spacing: 0.1em;
+  will-change: transform;
 }
 
 .tech-marquee span {
@@ -298,8 +299,8 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translateX(0) translateZ(0); }
+  100% { transform: translateX(-50%) translateZ(0); }
 }
 
 /* ── SHARED SECTION HEADER ── */
