@@ -62,7 +62,7 @@ export default function KnowledgeHubPage() {
   const fetchQuote = async () => {
     setLoadingQuote(true);
     try {
-      const res = await fetch('https://programming-quotesapi.vercel.app/api/random');
+      const res = await fetch('/quote-api/api/random');
       if (!res.ok) throw new Error('API error');
       const data = await res.json();
       const text = data.quote || data.en || data.text || (typeof data === 'string' ? data : null);
