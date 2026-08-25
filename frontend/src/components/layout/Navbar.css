@@ -164,7 +164,8 @@
    ============================================= */
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 14px);
+  top: 100%;
+  padding-top: 14px;
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
   opacity: 0;
@@ -176,17 +177,8 @@
 
 .nav-dropdown.open {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: auto;
   transform: translateX(-50%) translateY(0);
-}
-
-.nav-dropdown::before {
-  content: '';
-  position: absolute;
-  top: -14px;
-  left: 0;
-  right: 0;
-  height: 14px;
 }
 
 .dropdown-card {

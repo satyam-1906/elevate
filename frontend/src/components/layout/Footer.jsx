@@ -48,7 +48,7 @@ export default function Footer() {
           <div className="footer-links-group">
             <h4 className="footer-title">Technical Tracks</h4>
             <ul className="footer-list">
-              <li><a href="/#domains">Web2 & Cloud</a></li>
+              <li><Link to="/domains/web2">Web2 & Cloud</Link></li>
               <li><a href="/#domains">Web3 & Protocols</a></li>
               <li><a href="/#domains">AI & Machine Learning</a></li>
               <li><a href="/#domains">Cyber Security</a></li>
@@ -80,18 +80,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Join CTA row (compact, inline with bottom bar) */}
-        <div className="footer-join-row">
-          <div className="footer-join-text">
-            <span className="footer-join-label">Ready to Elevate?</span>
-            <span className="footer-join-desc">Connect with mentors and build breakthrough software.</span>
-          </div>
-          <a href="https://discord.com" target="_blank" rel="noreferrer" className="btn btn-primary" id="footer-join-btn">
-            <span>Join Discord</span>
-            <ArrowUpRight size={14} />
-          </a>
-        </div>
-        
+
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Elevate Club. Built for Technical Pioneers.</p>

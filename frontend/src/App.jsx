@@ -17,6 +17,7 @@ import KnowledgeHubPage from './pages/KnowledgeHub/KnowledgeHubPage';
 /* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
 const LegacyPage = lazy(() => import('./pages/Legacy/LegacyPage'));
 const GalleryPage = lazy(() => import('./pages/Gallery/GalleryPage'));
+const Web2Page = lazy(() => import('./pages/Domains/Web2Page'));
 
 
 /* ── Scroll to hash or top on route change ────────────────────────── */
@@ -194,6 +195,13 @@ function AppContent() {
               element={
                 <Suspense fallback={<div className="legacy-scene-loading" style={{ minHeight: '100vh' }} />}>
                   <GalleryPage />
+                </Suspense>
+              }
+            />
+            <Route path="/domains/web2"
+              element={
+                <Suspense fallback={<div className="legacy-scene-loading" style={{ minHeight: '100vh' }} />}>
+                  <Web2Page />
                 </Suspense>
               }
             />

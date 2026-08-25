@@ -9,7 +9,7 @@ import {
 import { ResourceForm, ResourcesList } from './AdminResources';
 import './AdminDashboard.css';
 
-const API = 'http://localhost:5000/api';
+const API = 'http://localhost:5001/api';
 
 /* ── API helper ──────────────────────────────────────────────────────────── */
 export function useApi(token) {

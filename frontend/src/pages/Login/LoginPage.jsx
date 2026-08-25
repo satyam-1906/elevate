@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Login.css';
@@ -20,6 +20,7 @@ export default function LoginPage({ role = 'student' }) {
 
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
+  const isInitialized = useRef(false);
 
   const isAdminPage = role === 'admin';
 
@@ -32,6 +33,8 @@ export default function LoginPage({ role = 'student' }) {
 
   /* ── Render & initialise Google button ───────────────────────────────── */
   const initButton = useCallback(async () => {
+    if (isInitialized.current) return;
+    
     await loadGoogleScript();
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     if (!clientId) return;
@@ -54,6 +57,8 @@ export default function LoginPage({ role = 'student' }) {
         }
       },
     });
+
+    isInitialized.current = true;
 
     window.google.accounts.id.renderButton(
       document.getElementById('google-btn'),

@@ -26,7 +26,7 @@ const navItems = [
     label: 'Domains',
     href: '/#domains',
     dropdown: [
-      { Icon: Globe, title: 'Web2', desc: 'Full-stack web & scalable cloud architecture', href: '/#domains' },
+      { Icon: Globe, title: 'Web2', desc: 'Full-stack web & scalable cloud architecture', href: '/domains/web2' },
       { Icon: Layers, title: 'Web3', desc: 'Blockchain protocols & smart contracts', href: '/#domains' },
       { Icon: Cpu, title: 'AI / ML', desc: 'Neural networks, LLMs & computer vision', href: '/#domains' },
       { Icon: ShieldCheck, title: 'Cyber Security', desc: 'Penetration testing & cryptography', href: '/#domains' },
@@ -96,6 +96,9 @@ export default function Navbar() {
         e.preventDefault();
         navigate(`/#${targetId}`);
       }
+    } else {
+      e.preventDefault();
+      navigate(href);
     }
     setMobileOpen(false);
     setActiveDropdown(null);
