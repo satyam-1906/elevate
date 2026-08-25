@@ -110,15 +110,15 @@ export default function Navbar() {
         <div className={`navbar-pill ${mobileOpen ? 'mobile-open' : ''}`}>
 
           {/* Logo with Space Grotesk font */}
-          <Link to="/" className="nav-logo" onClick={(e) => {
+          <a href="/" className="nav-logo" onClick={(e) => {
             if (location.pathname === '/') {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.location.href = '/';
             }
           }}>
             <img src="/logo.jpg" alt="Elevate Logo" className="nav-logo-img" />
             <span className="nav-logo-text brand-font">Elevate</span>
-          </Link>
+          </a>
 
           {/* Nav Links */}
           <nav className="nav-links" aria-label="Main navigation">
