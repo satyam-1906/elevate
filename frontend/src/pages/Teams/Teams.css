@@ -10,9 +10,6 @@
   max-width: 1300px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
 }
 
 .tree-tier {
@@ -38,7 +35,10 @@
 .team-profile-card {
   width: 250px !important;
   max-width: 250px;
-  margin: 0 auto;
+}
+
+.team-profile-card .pc-card {
+  height: 360px !important;
 }
 
 /* Titles that map out the tree levels */
@@ -77,9 +77,14 @@
 /* Responsive adjustments for maintaining card size best fit */
 @media (max-width: 800px) {
   .team-profile-card {
-    width: 220px !important;
-    max-width: 220px;
+    width: 230px !important;
+    max-width: 230px;
   }
+
+  .team-profile-card .pc-card {
+    height: 330px !important;
+  }
+
   .flex-tier {
     gap: 1.5rem;
   }
@@ -87,12 +92,11 @@
 
 @media (max-width: 500px) {
   .team-profile-card {
-    width: calc(100vw - 3rem) !important;
-    max-width: 300px;
+    width: 200px !important;
+    max-width: 200px;
   }
-  .flex-tier {
-    gap: 1.5rem;
-    flex-direction: column;
-    align-items: center;
+
+  .team-profile-card .pc-card {
+    height: 300px !important;
   }
 }
