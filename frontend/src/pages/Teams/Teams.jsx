@@ -31,7 +31,7 @@ const teamData = {
     { id: 'nt5', name: 'Madhur Mitkari', title: 'Non-Technical Operations Head', handle: 'non_tech_ops', status: 'Online', avatarUrl: '/domain_leads/head_of_non-technical.jpg' },
   ],
   nonTechLeads: [
-    { id: 'nt1', name: 'Aryan S.', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=256&auto=format&fit=crop' },
+    { id: 'nt1', name: 'Sanchit Sharma', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: '/domain_leads/corporate_lead.jpg' },
     { id: 'ntm', name: 'Anay Dubey', title: 'Management Lead', handle: 'management', status: 'Online', avatarUrl: '/domain_leads/management_lead.jpg' },
     { id: 'nt2', name: 'Janhavi Kurakula', title: 'Marketing and PR Lead', handle: 'marketing_pr', status: 'Online', avatarUrl: '/domain_leads/marketing_lead.jpg' },
     { id: 'nt3', name: 'Shashank Jinger', title: 'Design Lead', handle: 'design', status: 'Busy', avatarUrl: '/domain_leads/design_lead.png' },
