@@ -20,7 +20,7 @@ import { useAuth } from '../../context/AuthContext';
 import ParticleBackground from '../../components/common/ParticleBackground';
 import './EventsPage.css';
 
-const API = 'http://localhost:5001/api';
+const API = import.meta.env.VITE_API_URL;
 
 export default function EventsPage() {
   const { isAdmin } = useAuth();

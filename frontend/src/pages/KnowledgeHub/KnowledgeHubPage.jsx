@@ -68,7 +68,7 @@ export default function KnowledgeHubPage() {
   const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/resources/all')
+    fetch(`${import.meta.env.VITE_API_URL}/resources/all`)
       .then(res => res.json())
       .then(data => setResources(Array.isArray(data) ? data : data.resources || []))
       .catch(err => console.error('Failed to fetch resources:', err))
