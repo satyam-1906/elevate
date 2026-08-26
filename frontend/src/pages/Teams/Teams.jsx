@@ -26,21 +26,28 @@ const teamData = {
     status: 'Busy',
     avatarUrl: coleadPic
   },
-  nonTechLeads: [
-    { id: 'nt1', name: 'Corporate Lead', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=256&auto=format&fit=crop' },
-    { id: 'nt2', name: 'Marketing & PR Lead', title: 'Marketing & PR Lead', handle: 'marketing_pr', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop' },
-    { id: 'nt3', name: 'Design Lead', title: 'Design Lead', handle: 'design', status: 'Busy', avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=256&auto=format&fit=crop' },
-    { id: 'nt4', name: 'Head of Technical Ops', title: 'Head of Technical Operations', handle: 'tech_ops', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=256&auto=format&fit=crop' },
-    { id: 'nt5', name: 'Head of Non-Tech Ops', title: 'Head of Non-Technical Operations', handle: 'non_tech_ops', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop' },
+  opsLeads: [
+    { id: 'nt4', name: 'Aviral Joshi', title: 'Technical Operations Head', handle: 'tech_ops', status: 'Online', avatarUrl: '/domain_leads/head_of_techincal.png' },
+    { id: 'nt5', name: 'Madhur Mitkari', title: 'Non-Technical Operations Head', handle: 'non_tech_ops', status: 'Online', avatarUrl: '/domain_leads/head_of_non-technical.jpg' },
   ],
-  techLeads: [
-    { id: 't1', name: 'AI/ML Joint Head', title: 'AI/ML Joint Head', handle: 'aiml_head1', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=256&auto=format&fit=crop' },
-    { id: 't2', name: 'AI/ML Joint Head', title: 'AI/ML Joint Head', handle: 'aiml_head2', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop' },
-    { id: 't3', name: 'Web2 Lead', title: 'Web2 Lead', handle: 'web2_lead', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=256&auto=format&fit=crop' },
-    { id: 't4', name: 'Web3 Joint Lead', title: 'Web3 Joint Lead', handle: 'web3_head1', status: 'Busy', avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=256&auto=format&fit=crop' },
-    { id: 't5', name: 'Web3 Joint Lead', title: 'Web3 Joint Lead', handle: 'web3_head2', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop' },
-    { id: 't6', name: 'Cybersecurity Lead', title: 'Cybersecurity Lead', handle: 'cyber_lead', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=256&auto=format&fit=crop' },
-    { id: 't7', name: 'Open Source Lead', title: 'Open Source Lead', handle: 'oss_lead', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=256&auto=format&fit=crop' },
+  nonTechLeads: [
+    { id: 'nt1', name: '-', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=256&auto=format&fit=crop' },
+    { id: 'ntm', name: 'Anay Dubey', title: 'Management Lead', handle: 'management', status: 'Online', avatarUrl: '/domain_leads/management_lead.jpg' },
+    { id: 'nt2', name: 'Jahanvi Kurakula', title: 'Marketing and PR Lead', handle: 'marketing_pr', status: 'Online', avatarUrl: '/domain_leads/marketing_lead.jpg' },
+    { id: 'nt3', name: 'Shashank Jinger', title: 'Design Lead', handle: 'design', status: 'Busy', avatarUrl: '/domain_leads/design_lead.png' },
+  ],
+  techJointLeads1: [
+    { id: 't1', name: 'Bishal Dey', title: 'AI/ML Joint Lead 1', handle: 'aiml_head1', status: 'Online', avatarUrl: '/domain_leads/aiml_lead_1.png' },
+    { id: 't2', name: 'Ansh Suryawanshi', title: 'AI/ML Joint Lead 2', handle: 'aiml_head2', status: 'Online', avatarUrl: '/domain_leads/aimml_lead_2.jpg' },
+  ],
+  techJointLeads2: [
+    { id: 't4', name: 'Samyaak Jain', title: 'Web3 Joint Lead 1', handle: 'web3_head1', status: 'Busy', avatarUrl: '/domain_leads/web3_lead1.jpg' },
+    { id: 't5', name: 'Arnav Bansal', title: 'Web3 Joint Lead 2', handle: 'web3_head2', status: 'Online', avatarUrl: '/domain_leads/web3_lead2.jpg' },
+  ],
+  techIndividualLeads: [
+    { id: 't3', name: 'Vinay Kumrawat', title: 'Web Dev Lead', handle: 'web2_lead', status: 'Online', avatarUrl: '/domain_leads/web_dev_lead.png' },
+    { id: 't6', name: 'Gaurang Bhavsar', title: 'Cybersecurity Lead', handle: 'cyber_lead', status: 'Online', avatarUrl: '/domain_leads/cybersecurity_lead.jpg' },
+    { id: 't7', name: 'Tanmay Agarwal', title: 'Open-Source Lead', handle: 'oss_lead', status: 'Online', avatarUrl: '/domain_leads/open_source_lead.jpg' },
   ]
 };
 
@@ -96,12 +103,12 @@ export default function Teams() {
 
         <div className="tree-branch vertical-branch-long"></div>
 
-        {/* Tier 3: Non-Tech Leads */}
+        {/* Tier 3: Operations Leads */}
         <div className="group-heading">
-          <StaggeredText text="Non-Technical Domain" />
+          <StaggeredText text="Operations Leadership" />
         </div>
         <div className="tree-tier flex-tier">
-          {teamData.nonTechLeads.map((lead) => (
+          {teamData.opsLeads.map((lead) => (
             <div key={lead.id} className="tree-node-wrapper">
               <ProfileCard 
                 name={lead.name}
@@ -122,8 +129,66 @@ export default function Teams() {
         <div className="group-heading">
           <StaggeredText text="Technical Domain" />
         </div>
+        
+        {/* Joint AI/ML Leads */}
+        <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
+          {teamData.techJointLeads1.map((lead) => (
+            <div key={lead.id} className="tree-node-wrapper">
+              <ProfileCard 
+                name={lead.name}
+                title={lead.title}
+                handle={lead.handle}
+                status={lead.status}
+                avatarUrl={lead.avatarUrl}
+                className="team-profile-card"
+                innerGradient={baseGradient}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Joint Web3 Leads */}
+        <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
+          {teamData.techJointLeads2.map((lead) => (
+            <div key={lead.id} className="tree-node-wrapper">
+              <ProfileCard 
+                name={lead.name}
+                title={lead.title}
+                handle={lead.handle}
+                status={lead.status}
+                avatarUrl={lead.avatarUrl}
+                className="team-profile-card"
+                innerGradient={baseGradient}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Individual Tech Leads */}
         <div className="tree-tier flex-tier">
-          {teamData.techLeads.map((lead) => (
+          {teamData.techIndividualLeads.map((lead) => (
+            <div key={lead.id} className="tree-node-wrapper">
+              <ProfileCard 
+                name={lead.name}
+                title={lead.title}
+                handle={lead.handle}
+                status={lead.status}
+                avatarUrl={lead.avatarUrl}
+                className="team-profile-card"
+                innerGradient={baseGradient}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="tree-branch vertical-branch-long spaced-branch"></div>
+
+        {/* Tier 5: Non-Tech Leads */}
+        <div className="group-heading">
+          <StaggeredText text="Non-Technical Domain" />
+        </div>
+        <div className="tree-tier flex-tier">
+          {teamData.nonTechLeads.map((lead) => (
             <div key={lead.id} className="tree-node-wrapper">
               <ProfileCard 
                 name={lead.name}

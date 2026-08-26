@@ -155,6 +155,12 @@
   overflow: visible;
   transform: translateZ(2);
   backface-visibility: hidden;
+  transition: filter 0.4s ease; /* For smooth transitions if filters are applied */
+}
+
+.pc-card-wrapper:hover .pc-avatar-content,
+.pc-card-wrapper.active .pc-avatar-content {
+  mix-blend-mode: normal;
 }
 
 .pc-avatar-content .avatar {
@@ -169,8 +175,14 @@
   transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0)
     scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
   backface-visibility: hidden;
-  will-change: transform;
-  transition: transform 120ms ease-out;
+  will-change: transform, filter;
+  transition: transform 120ms ease-out, filter 0.4s ease;
+  filter: grayscale(70%) sepia(20%) hue-rotate(200deg) brightness(0.9);
+}
+
+.pc-card-wrapper:hover .pc-avatar-content .avatar,
+.pc-card-wrapper.active .pc-avatar-content .avatar {
+  filter: grayscale(0%) sepia(0%) hue-rotate(0deg) brightness(1);
 }
 
 .pc-avatar-content::before {
@@ -296,22 +308,22 @@
 .pc-details {
   width: 100%;
   position: absolute;
-  /* Move to top of card, not over the face */
-  top: 0;
+  /* Placed at bottom so it does not overlap the face at the top */
+  bottom: 0;
   left: 0;
   right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 16px 28px;
-  /* Dark gradient scrim behind the text so it's always readable */
+  padding: 30px 16px 20px;
+  /* Dark gradient scrim fading upwards */
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.45) 60%,
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
     transparent 100%
   );
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
   gap: 4px;
 }
 
@@ -382,10 +394,6 @@
     max-height: 450px;
   }
 
-  .pc-details {
-    top: 2em;
-  }
-
   .pc-details h3 {
     font-size: clamp(1rem, 5vw, 1.3rem);
   }
@@ -426,10 +434,6 @@
   .pc-card {
     height: 60svh;
     max-height: 380px;
-  }
-
-  .pc-details {
-    top: 1.5em;
   }
 
   .pc-details h3 {
