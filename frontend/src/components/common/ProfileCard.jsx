@@ -17,6 +17,7 @@ const adjust = (v, fMin, fMax, tMin, tMax) => round(tMin + ((tMax - tMin) * (v -
 
 const ProfileCardComponent = ({
   avatarUrl = '<Placeholder for avatar URL>',
+  avatarPosition = 'center',
   iconUrl, // removed default placeholder here as it uses string literal fallback
   grainUrl, // removed default
   innerGradient,
@@ -317,6 +318,7 @@ const ProfileCardComponent = ({
                 className="avatar"
                 src={avatarUrl}
                 alt={`${name || 'User'} avatar`}
+                style={{ objectPosition: avatarPosition }}
                 loading="lazy"
                 onError={e => {
                   const t = e.target;

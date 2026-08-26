@@ -34,7 +34,7 @@ const teamData = {
     { id: 'nt3', name: 'Shashank Jinger', title: 'Design Lead', handle: 'design', status: 'Busy', avatarUrl: '/domain_leads/Shashank_Design_lead.jpg' },
     { id: 'ntm', name: 'Anay Dubey', title: 'Management Lead', handle: 'management', status: 'Online', avatarUrl: '/domain_leads/management_lead.jpg' },
     { id: 'nt2', name: 'Janhavi Kurakula', title: 'Marketing and PR Lead', handle: 'marketing_pr', status: 'Online', avatarUrl: '/domain_leads/marketing_lead.jpg' },
-    { id: 'nt1', name: 'Sanchit Sharma', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: '/domain_leads/corporate_lead.jpg' },
+    { id: 'nt1', name: 'Sanchit Sharma', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: '/domain_leads/corporate_lead.jpg', avatarPosition: 'right' },
   ],
   techJointLeads1: [
     { id: 't1', name: 'Bishal Dey', title: 'AI/ML Joint Lead 1', handle: 'aiml_head1', status: 'Online', avatarUrl: '/domain_leads/aiml_lead_1.png' },
@@ -196,6 +196,7 @@ export default function Teams() {
                 handle={lead.handle}
                 status={lead.status}
                 avatarUrl={lead.avatarUrl}
+                avatarPosition={lead.avatarPosition}
                 className="team-profile-card"
                 innerGradient={baseGradient}
               />
