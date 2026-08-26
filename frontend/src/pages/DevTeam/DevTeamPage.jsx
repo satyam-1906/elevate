@@ -8,7 +8,7 @@ import './DevTeamPage.css';
 const devTeam = [
   { id: 'vinay', name: 'Vinay Kumrawat', role: 'Frontend Developer', githubUrl: 'https://github.com/vinaykumrawat', imageUrl: '/dev_pic/Vinay_Kumrawat.png' },
   { id: 'tushar', name: 'Tushar Agarwal', role: 'Full Stack Developer', githubUrl: 'https://github.com/tushar-313', imageUrl: '/dev_pic/Tushar_Agarwal.png' },
-  { id: 'bishal', name: 'Bishal Dey', role: 'Full Stack Developer', githubUrl: 'https://github.com/bishaldey', imageUrl: '/dev_pic/Bishal_dey.jpg' },
+  { id: 'bishal', name: 'Bishal Dey', role: 'Full Stack Developer', githubUrl: 'https://github.com/bishaldey', imageUrl: '/dev_pic/Bishal_dey_1.jpg' },
   { id: 'aviral', name: 'Aviral Joshi', role: 'Database & Cloud Engineer', githubUrl: 'https://github.com/aviraljoshi', imageUrl: '/dev_pic/Aviral_Joshi.png' }
 ];
 
