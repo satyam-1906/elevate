@@ -14,7 +14,7 @@ const devTeam = [
 
 function DevCard({ node, index }) {
   return (
-    <motion.div 
+    <motion.div
       className="cyber-dev-card"
       initial={{ opacity: 0, y: 50, rotateX: 10 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -25,7 +25,7 @@ function DevCard({ node, index }) {
       <div className="cyber-card-inner">
         <div className="cyber-card-glare"></div>
         <div className="cyber-card-border"></div>
-        
+
         <div className="cyber-image-wrapper">
           <div className="cyber-image-glitch-layer"></div>
           {node.imageUrl ? (
@@ -36,14 +36,14 @@ function DevCard({ node, index }) {
             </div>
           )}
         </div>
-        
+
         <div className="cyber-info">
           <div className="cyber-role">
             <span className="cyber-role-text">{'//'} {node.role.toUpperCase()}</span>
             <span className="cyber-blinker">_</span>
           </div>
           <h3 className="cyber-name" data-text={node.name}>{node.name}</h3>
-          
+
           {node.githubUrl && (
             <a href={node.githubUrl} target="_blank" rel="noreferrer" className="cyber-github">
               <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
@@ -53,7 +53,7 @@ function DevCard({ node, index }) {
             </a>
           )}
         </div>
-        
+
         {/* Decorative Sci-Fi elements */}
         <div className="cyber-deco-top-left"></div>
         <div className="cyber-deco-bottom-right"></div>
@@ -79,7 +79,7 @@ export default function DevTeamPage() {
       <div className="legacy-content">
         {/* Hero Section */}
         <section className="legacy-hero">
-          <motion.div 
+          <motion.div
             className="hero-inner"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

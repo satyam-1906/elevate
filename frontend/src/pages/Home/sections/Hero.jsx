@@ -56,7 +56,7 @@ export default function Hero() {
             </div>
 
             <p className="hero-subtitle">
-              Join the premier technical club. Build decentralized networks, train foundation AI models, 
+              Join the premier technical club. Build decentralized networks, train foundation AI models,
               secure critical infrastructure, and engineer breakthrough applications with industry-grade mentorship.
             </p>
 

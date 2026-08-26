@@ -47,10 +47,11 @@
   max-width: 320px;
   cursor: pointer;
   z-index: 2;
-  padding: 2px; /* For the gradient border */
+  padding: 2px;
+  /* For the gradient border */
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s;
 }
 
@@ -62,15 +63,13 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(
-    transparent, 
-    transparent 30%, 
-    rgba(0, 255, 255, 0.2) 40%, 
-    var(--glow) 50%,
-    transparent 60%,
-    rgba(255, 0, 85, 0.2) 90%,
-    var(--cyber-accent) 100%
-  );
+  background: conic-gradient(transparent,
+      transparent 30%,
+      rgba(0, 255, 255, 0.2) 40%,
+      var(--glow) 50%,
+      transparent 60%,
+      rgba(255, 0, 85, 0.2) 90%,
+      var(--cyber-accent) 100%);
   animation: spin 6s linear infinite;
   z-index: -2;
   opacity: 0.5;
@@ -78,8 +77,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Solid background behind the inner card, masking the middle of the gradient */
@@ -97,7 +101,7 @@
 .cyber-dev-card:hover {
   transform: translateY(-15px) scale(1.03);
   z-index: 10;
-  box-shadow: 
+  box-shadow:
     0 25px 45px rgba(0, 0, 0, 0.7),
     0 0 30px rgba(0, 255, 255, 0.2);
 }
@@ -127,7 +131,7 @@
 .cyber-card-glare {
   position: absolute;
   inset: 0;
-  background: linear-gradient(125deg, rgba(255,255,255,0.15) 0%, transparent 40%, rgba(0,255,255,0.05) 100%);
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%, rgba(0, 255, 255, 0.05) 100%);
   z-index: 10;
   pointer-events: none;
   opacity: 0;
@@ -146,8 +150,8 @@
   height: 230px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Dark gradient overlay at the bottom of the image */
@@ -155,7 +159,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(10,10,15,1) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(10, 10, 15, 1) 0%, transparent 50%);
   z-index: 2;
   opacity: 0.9;
   transition: opacity 0.5s;
@@ -190,13 +194,11 @@
   font-size: 4rem;
   font-weight: 800;
   color: rgba(0, 255, 255, 0.3);
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(0, 255, 255, 0.05),
-    rgba(0, 255, 255, 0.05) 10px,
-    transparent 10px,
-    transparent 20px
-  );
+  background: repeating-linear-gradient(45deg,
+      rgba(0, 255, 255, 0.05),
+      rgba(0, 255, 255, 0.05) 10px,
+      transparent 10px,
+      transparent 20px);
 }
 
 /* Info Section */
@@ -206,7 +208,8 @@
   gap: 0.4rem;
   position: relative;
   z-index: 10;
-  margin-top: -20px; /* Pull it slightly into the image gradient */
+  margin-top: -20px;
+  /* Pull it slightly into the image gradient */
 }
 
 .cyber-role {
@@ -236,8 +239,15 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .cyber-name {
@@ -254,7 +264,7 @@
 .cyber-dev-card:hover .cyber-name {
   color: #ffffff;
   transform: translateX(4px);
-  text-shadow: 0 0 10px rgba(255,255,255,0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 /* GitHub Button */
