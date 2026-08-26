@@ -15,7 +15,7 @@ async function seed() {
     const filePath = require('path').resolve(__dirname, '../../../frontend/src/data/knowledgeData.js');
     const { knowledgeResources } = await import('file://' + filePath.replace(/\\/g, '/'));
 
-    const docs = knowledgeResources.map(res => ({
+    const docs = knowledgeResources.map((res, idx) => ({
       title: res.title,
       description: res.description,
       domain: res.domain,
@@ -27,7 +27,8 @@ async function seed() {
       author: res.author,
       cost: res.cost,
       official: res.official,
-      rating: res.rating
+      rating: res.rating,
+      createdAt: new Date(Date.now() + idx * 1000)
     }));
 
     await Resource.insertMany(docs);

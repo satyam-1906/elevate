@@ -1,0 +1,30 @@
+Fast.ai Part 2: Deep Learning from the Foundations
+AI Engineer Roadmap & Tech Stack
+Hugging Face LLM & NLP Course
+Building Systems with ChatGPT API & RAG
+Stanford CS229: Machine Learning & Applied Science
+fast.ai Practical Deep Learning for Coders
+PyTorch Official Tutorials & Research Models
+PyTorch Fundamentals
+Practical MLOps
+DeepMind Research & Publications
+Gymnasium (OpenAI Gym) Documentation
+Papers with Code
+MIT 6.S191: Intro to Deep Learning
+Full Stack Deep Learning
+Keras Code Examples
+Stanford CS224N: NLP with Deep Learning
+Hugging Face Open-Source Course
+Stanford CS231n: CNNs for Visual Recognition
+TensorFlow Core Tutorials
+Dive into Deep Learning (D2L)
+Scikit-Learn User Guide
+Hugging Face NLP Course
+DeepLearning.AI Specialization
+Kaggle Intro to Machine Learning
+Google Machine Learning Crash Course
+Elements of AI
+fast.ai — Practical Deep Learning
+Machine Learning by Andrew Ng
+Made With ML
+Stanford CS229
