@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   BookOpen, 
   Search, 
@@ -25,11 +25,18 @@ import ParticleBackground from '../../components/common/ParticleBackground';
 import './KnowledgeHubPage.css';
 
 export default function KnowledgeHubPage() {
+  const location = useLocation();
   const { isAdmin } = useAuth();
   const [resources, setResources] = useState([]);
   const [loadingResources, setLoadingResources] = useState(true);
 
+  const initialDomain = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get('domain') || 'All';
+  }, [location.search]);
+
   const [showQuestionnaire, setShowQuestionnaire] = useState(() => {
+    if (initialDomain !== 'All') return false;
     return !sessionStorage.getItem('knowledgeHubFormCompleted');
   });
   const [questionStep, setQuestionStep] = useState(1); // 1 = Domain, 2 = Difficulty
@@ -40,9 +47,18 @@ export default function KnowledgeHubPage() {
       window.scrollTo(0, 0);
     }
   }, [showQuestionnaire]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const domain = params.get('domain');
+    if (domain) {
+      setActiveDomain(domain);
+      setShowQuestionnaire(false);
+    }
+  }, [location.search]);
   
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeDomain, setActiveDomain] = useState('All');
+  const [activeDomain, setActiveDomain] = useState(initialDomain);
   const [activeDifficulty, setActiveDifficulty] = useState('All');
 
   const [quoteData, setQuoteData] = useState(null);

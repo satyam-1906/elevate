@@ -4,13 +4,11 @@ import { motion } from 'framer-motion';
 import { legacyYears } from '../../data/legacy';
 import GalaxyBackground from './components/GalaxyBackground';
 import YearSection from './components/YearSection';
-import ParticleBackground from '../../components/common/ParticleBackground';
 import './LegacyPage.css';
 
 export default function LegacyPage() {
   return (
     <div className="legacy-page-container">
-      <ParticleBackground count={22} intensity="medium" />
       {/* 3D Starfield Background fixed to viewport */}
       <div className="legacy-background">
         <Canvas camera={{ position: [0, 0, 1] }}>

@@ -1,4 +1,5 @@
 import { ArrowRight, Compass } from 'lucide-react';
+import { Link } from 'react-router-dom';
 // FloatingLines is now the Hero background (NeuroNoise kept below, just swap import to switch back)
 import FloatingLines from '../../../components/motion/FloatingLines';
 // import NeuroNoise from '../../../components/motion/NeuroNoise'; // ← keep for fallback
@@ -61,14 +62,14 @@ export default function Hero() {
 
             {/* Call to Actions */}
             <div className="hero-ctas">
-              <a href="#join" className="btn btn-primary hero-btn-main glow-effect">
-                <span>Join Elevate</span>
+              <Link to="/login/student" className="btn btn-primary hero-btn-main glow-effect">
+                <span>Enter</span>
                 <ArrowRight size={18} />
-              </a>
-              <a href="#domains" className="btn btn-outline hero-btn-secondary">
+              </Link>
+              <Link to="/knowledge-hub" className="btn btn-outline hero-btn-secondary">
                 <Compass size={18} />
                 <span>Explore Domains</span>
-              </a>
+              </Link>
             </div>
 
             {/* Powered by / Tech Domains Row */}

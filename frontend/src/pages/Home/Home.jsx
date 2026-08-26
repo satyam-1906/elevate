@@ -5,7 +5,6 @@ import Domains from './sections/Domains';
 import Events from './sections/Events';
 import Legacy from './sections/Legacy';
 import Knowledge from './sections/Knowledge';
-import Challenges from './sections/Challenges';
 import Sponsors from './sections/Sponsors';
 
 function Home() {
@@ -17,7 +16,6 @@ function Home() {
       <Events />
       <Legacy />
       <Knowledge />
-      <Challenges />
       <Sponsors />
     </div>
   );

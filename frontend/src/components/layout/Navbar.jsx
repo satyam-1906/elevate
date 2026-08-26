@@ -39,8 +39,8 @@ const navItems = [
   { label: 'Events', href: '/events', isRoute: true },
   { label: 'Gallery', href: '/gallery', isRoute: true },
   { label: 'Sponsors', href: '/#sponsors' },
-
   { label: 'Knowledge Hub', href: '/knowledge-hub', isRoute: true },
+  { label: 'Dev Team', href: '/dev-team', isRoute: true },
 ];
 
 export default function Navbar() {

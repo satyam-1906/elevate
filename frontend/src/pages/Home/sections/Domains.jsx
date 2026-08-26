@@ -8,6 +8,7 @@ import {
   ArrowRight, 
   Sparkles 
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import LogoLoop from '../../../components/motion/LogoLoop';
 import StaggeredText from '../../../components/motion/StaggeredText';
 import './Domains.css';
@@ -64,6 +65,15 @@ const domainsData = [
 ];
 
 export default function Domains() {
+  const domainToHub = {
+    'web2': 'Web2',
+    'web3': 'Web3',
+    'ai-ml': 'AI/ML',
+    'cyber': 'Cyber Security',
+    'app-dev': 'App Development',
+    'open-source': 'Open Source'
+  };
+
   const renderDomainCard = (domain) => {
     const { Icon } = domain;
     return (
@@ -84,10 +94,10 @@ export default function Domains() {
           ))}
         </div>
 
-        <a href={`#${domain.id}`} className="dl-link">
+        <Link to={`/knowledge-hub?domain=${encodeURIComponent(domainToHub[domain.id])}`} className="dl-link">
           <span>Explore Track</span>
           <ArrowRight size={14} className="dl-arrow" />
-        </a>
+        </Link>
       </div>
     );
   };

@@ -12,7 +12,7 @@
 .pb-particle {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(160, 130, 255, 0.9) 0%, rgba(255, 80, 160, 0.5) 60%, transparent 100%);
+  background: radial-gradient(circle, rgba(0, 150, 255, 0.9) 0%, rgba(0, 80, 255, 0.5) 60%, transparent 100%);
   animation: pb-rise linear infinite;
   will-change: transform, opacity;
 }
@@ -39,7 +39,7 @@
 
 .pb-blob-1 {
   width: 680px; height: 680px;
-  background: radial-gradient(circle, rgba(110, 85, 255, 0.28) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(0, 150, 255, 0.28) 0%, transparent 68%);
   top: -18%; left: 2%;
   filter: blur(125px);
   animation-duration: 22s;
@@ -47,7 +47,7 @@
 
 .pb-blob-2 {
   width: 540px; height: 540px;
-  background: radial-gradient(circle, rgba(255, 40, 130, 0.2) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(0, 80, 255, 0.2) 0%, transparent 65%);
   bottom: 4%; right: 0%;
   filter: blur(130px);
   animation-duration: 27s;
@@ -56,7 +56,7 @@
 
 .pb-blob-3 {
   width: 380px; height: 380px;
-  background: radial-gradient(circle, rgba(0, 210, 210, 0.14) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.14) 0%, transparent 65%);
   top: 38%; left: 52%;
   filter: blur(110px);
   animation-duration: 19s;
