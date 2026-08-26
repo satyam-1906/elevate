@@ -35,6 +35,7 @@ const navItems = [
     ],
   },
   { label: 'Teams', href: '/teams', isRoute: true },
+  { label: 'Legacy', href: '/legacy', isRoute: true },
   { label: 'Events', href: '/events', isRoute: true },
   { label: 'Gallery', href: '/gallery', isRoute: true },
   { label: 'Knowledge Hub', href: '/knowledge-hub', isRoute: true },
