@@ -166,7 +166,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 0%;
+  object-position: center;
   position: absolute;
   left: 50%;
   top: 0;
@@ -306,21 +306,20 @@
 .pc-details {
   width: 100%;
   position: absolute;
-  /* Move to bottom of card */
-  bottom: 0;
+  /* Move to top of card, not over the face */
+  top: 0;
   left: 0;
   right: 0;
-  top: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 16px 20px;
-  /* Dark gradient scrim fading upwards */
-  background: linear-gradient(to top,
-      rgba(0, 0, 0, 0.95) 0%,
-      rgba(0, 0, 0, 0.7) 50%,
+  padding: 20px 16px 28px;
+  /* Dark gradient scrim behind the text so it's always readable */
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.45) 60%,
       transparent 100%);
-  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
   gap: 4px;
 }
 
@@ -391,6 +390,10 @@
     max-height: 450px;
   }
 
+  .pc-details {
+    top: 2em;
+  }
+
   .pc-details h3 {
     font-size: clamp(1rem, 5vw, 1.3rem);
   }
@@ -431,6 +434,10 @@
   .pc-card {
     height: 60svh;
     max-height: 380px;
+  }
+
+  .pc-details {
+    top: 1.5em;
   }
 
   .pc-details h3 {

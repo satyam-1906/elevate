@@ -31,10 +31,10 @@ const teamData = {
     { id: 'nt5', name: 'Madhur Mitkari', title: 'Non-Technical Operations Head', handle: 'non_tech_ops', status: 'Online', avatarUrl: '/domain_leads/head_of_non-technical.jpg' },
   ],
   nonTechLeads: [
-    { id: 'nt1', name: 'Sanchit Sharma', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: '/domain_leads/corporate_lead.jpg' },
+    { id: 'nt3', name: 'Shashank Jinger', title: 'Design Lead', handle: 'design', status: 'Busy', avatarUrl: '/domain_leads/Shashank_Design_lead.jpg' },
     { id: 'ntm', name: 'Anay Dubey', title: 'Management Lead', handle: 'management', status: 'Online', avatarUrl: '/domain_leads/management_lead.jpg' },
     { id: 'nt2', name: 'Janhavi Kurakula', title: 'Marketing and PR Lead', handle: 'marketing_pr', status: 'Online', avatarUrl: '/domain_leads/marketing_lead.jpg' },
-    { id: 'nt3', name: 'Shashank Jinger', title: 'Design Lead', handle: 'design', status: 'Busy', avatarUrl: '/domain_leads/design_lead.png' },
+    { id: 'nt1', name: 'Sanchit Sharma', title: 'Corporate Lead', handle: 'corporate', status: 'Online', avatarUrl: '/domain_leads/corporate_lead.jpg' },
   ],
   techJointLeads1: [
     { id: 't1', name: 'Bishal Dey', title: 'AI/ML Joint Lead 1', handle: 'aiml_head1', status: 'Online', avatarUrl: '/domain_leads/aiml_lead_1.png' },
@@ -130,23 +130,6 @@ export default function Teams() {
           <StaggeredText text="Technical Domain" />
         </div>
 
-        {/* Individual Tech Leads (Web Dev, Cybersecurity, Open Source) */}
-        <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
-          {teamData.techIndividualLeads.map((lead) => (
-            <div key={lead.id} className="tree-node-wrapper">
-              <ProfileCard
-                name={lead.name}
-                title={lead.title}
-                handle={lead.handle}
-                status={lead.status}
-                avatarUrl={lead.avatarUrl}
-                className="team-profile-card"
-                innerGradient={baseGradient}
-              />
-            </div>
-          ))}
-        </div>
-
         {/* Joint AI/ML Leads */}
         <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
           {teamData.techJointLeads1.map((lead) => (
@@ -165,8 +148,25 @@ export default function Teams() {
         </div>
 
         {/* Joint Web3 Leads */}
-        <div className="tree-tier flex-tier">
+        <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
           {teamData.techJointLeads2.map((lead) => (
+            <div key={lead.id} className="tree-node-wrapper">
+              <ProfileCard
+                name={lead.name}
+                title={lead.title}
+                handle={lead.handle}
+                status={lead.status}
+                avatarUrl={lead.avatarUrl}
+                className="team-profile-card"
+                innerGradient={baseGradient}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Individual Tech Leads (Web Dev, Cybersecurity, Open Source) */}
+        <div className="tree-tier flex-tier">
+          {teamData.techIndividualLeads.map((lead) => (
             <div key={lead.id} className="tree-node-wrapper">
               <ProfileCard
                 name={lead.name}
