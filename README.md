@@ -2,6 +2,11 @@
 
 The official website of **Elevate**, our college's student-run technical community club — built by and for student developers, researchers, and engineers. Built with a premium, high-performance tech stack focused on smooth interactions and modern developer aesthetics.
 
+## 🌐 Live Demo
+
+🚀 **[Visit the Live Website](https://elevate-black-two.vercel.app/)**
+
+
 > **Vision:** When someone visits Elevate, they should be able to **Discover → Explore → Learn → Participate → Connect**. The site preserves the club's history, showcases what current members are building, and keeps growing with every future Elevate batch.
 
 ---
