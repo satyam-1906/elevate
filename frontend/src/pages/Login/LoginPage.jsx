@@ -104,7 +104,7 @@ export default function LoginPage({ role = 'student' }) {
         {/* Google button */}
         <div className="login-btn-wrap">
           {loading
-            ? <div className="login-spinner" />
+            ? <span className="login-loading-text">Authenticating...</span>
             : <div id="google-btn" />}
         </div>
 

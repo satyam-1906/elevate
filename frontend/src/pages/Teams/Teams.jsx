@@ -130,6 +130,23 @@ export default function Teams() {
           <StaggeredText text="Technical Domain" />
         </div>
 
+        {/* Individual Tech Leads (Web Dev, Cybersecurity, Open Source) */}
+        <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
+          {teamData.techIndividualLeads.map((lead) => (
+            <div key={lead.id} className="tree-node-wrapper">
+              <ProfileCard
+                name={lead.name}
+                title={lead.title}
+                handle={lead.handle}
+                status={lead.status}
+                avatarUrl={lead.avatarUrl}
+                className="team-profile-card"
+                innerGradient={baseGradient}
+              />
+            </div>
+          ))}
+        </div>
+
         {/* Joint AI/ML Leads */}
         <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
           {teamData.techJointLeads1.map((lead) => (
@@ -148,25 +165,8 @@ export default function Teams() {
         </div>
 
         {/* Joint Web3 Leads */}
-        <div className="tree-tier flex-tier" style={{ marginBottom: '20px' }}>
-          {teamData.techJointLeads2.map((lead) => (
-            <div key={lead.id} className="tree-node-wrapper">
-              <ProfileCard
-                name={lead.name}
-                title={lead.title}
-                handle={lead.handle}
-                status={lead.status}
-                avatarUrl={lead.avatarUrl}
-                className="team-profile-card"
-                innerGradient={baseGradient}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Individual Tech Leads */}
         <div className="tree-tier flex-tier">
-          {teamData.techIndividualLeads.map((lead) => (
+          {teamData.techJointLeads2.map((lead) => (
             <div key={lead.id} className="tree-node-wrapper">
               <ProfileCard
                 name={lead.name}

@@ -22,9 +22,32 @@ import './EventsPage.css';
 
 const API = import.meta.env.VITE_API_URL;
 
+const defaultEvents = [
+  {
+    _id: 'devcon-series',
+    title: 'ROAD TO DEVCON - WEB3 WORKSHOP SERIES',
+    type: 'Web3 Workshop Series',
+    date: '2026-08-24T22:00:00.000Z',
+    endDate: '2026-08-29T23:59:59.000Z',
+    location: 'Online',
+    time: '10:00 PM | Every day',
+    description: `Curious about Blockchain, Ethereum & Web3? Join our 6-day hands-on workshop covering the journey from basics to smart contracts, tokens & NFTs. Open to everyone exploring Web3!\n\n🔥 Daily Schedule:\n• 24 Aug - Blockchain & Ethereum Basics\n• 25 Aug - Smart Contracts Basics\n• 26 Aug - Remix IDE & Smart Contracts\n• 27 Aug - Deploying Smart Contracts\n• 28 Aug - Create Your Own Token\n• 29 Aug - Create Your Own NFT`
+  },
+  {
+    _id: 'club-intro',
+    title: 'Club Intro Session',
+    type: 'Orientation',
+    date: '2026-08-27T17:00:00.000Z',
+    endDate: '2026-08-27T18:30:00.000Z',
+    location: 'Seminar Hall',
+    time: '5:00 PM',
+    description: 'Join our introductory session to learn all about Elevate, our technical domains, upcoming hackathons, projects, and how to get involved!'
+  }
+];
+
 export default function EventsPage() {
   const { isAdmin } = useAuth();
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(defaultEvents);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('upcoming'); // 'ongoing' | 'upcoming' | 'past'
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,11 +56,13 @@ export default function EventsPage() {
     fetch(`${API}/events/all`)
       .then((res) => res.json())
       .then((data) => {
-        setEvents(Array.isArray(data) ? data : data.events || []);
+        const fetched = Array.isArray(data) ? data : data.events || [];
+        if (fetched.length > 0) {
+          setEvents(fetched);
+        }
       })
       .catch((err) => {
         console.error('Failed to fetch events:', err);
-        setEvents([]);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -56,7 +81,11 @@ export default function EventsPage() {
       const evDateOnly = new Date(evDate);
       evDateOnly.setHours(0, 0, 0, 0);
 
-      if (evDateOnly.getTime() === today.getTime()) {
+      const evEndDate = ev.endDate ? new Date(ev.endDate) : evDate;
+      const evEndDateOnly = new Date(evEndDate);
+      evEndDateOnly.setHours(23, 59, 59, 999);
+
+      if (today >= evDateOnly && today <= evEndDateOnly) {
         ongoingList.push(ev);
       } else if (evDateOnly > today) {
         upcomingList.push(ev);
@@ -262,21 +291,9 @@ export default function EventsPage() {
                     </p>
 
                     <div className="event-feed-footer">
-                      {activeTab === 'upcoming' || activeTab === 'ongoing' ? (
-                        <a
-                          href="https://discord.com"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="btn btn-primary event-cta-btn"
-                        >
-                          <span>Register & Join</span>
-                          <ArrowRight size={14} />
-                        </a>
-                      ) : (
-                        <div className="event-concluded-text">
-                          <span>Archive Record</span>
-                        </div>
-                      )}
+                      <div className="event-meta-info" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                        📍 {ev.location || 'Online'} • ⏰ {ev.time || 'TBA'}
+                      </div>
                     </div>
                   </div>
                 </article>

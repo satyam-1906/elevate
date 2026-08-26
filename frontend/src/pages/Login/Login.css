@@ -131,15 +131,12 @@
   align-items: center;
   min-height: 44px;
 }
-.login-spinner {
-  width: 28px;
-  height: 28px;
-  border: 3px solid var(--border);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+.login-loading-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Footer */
 .login-footer-text {

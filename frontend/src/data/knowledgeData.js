@@ -828,5 +828,316 @@ export const knowledgeResources = [
     official: true,
     links: [{ label: "Guide", url: "https://community.apache.org/contributors/" }],
     rating: "9.1/10"
+  },
+
+  // ==========================================
+  // Role Specific Curated Learning Pathways
+  // ==========================================
+  // Full Stack Developer
+  {
+    id: 101,
+    title: "Developer Roadmap - Full Stack Path",
+    domain: "Web2",
+    type: "Roadmap & Guide",
+    difficulty: "Beginner",
+    description: "Step-by-step interactive roadmap to master modern frontend, backend, databases, and DevOps.",
+    author: "roadmap.sh",
+    tags: ["Full Stack Developer", "Full Stack", "Web2", "Roadmap", "JavaScript"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "View Roadmap", url: "https://roadmap.sh/full-stack" }],
+    rating: "9.9/10"
+  },
+  {
+    id: 102,
+    title: "Full Stack Open 2024",
+    domain: "Web2",
+    type: "Complete Course",
+    difficulty: "Intermediate",
+    description: "Learn React, Redux, Node.js, Express, MongoDB, GraphQL, and TypeScript in one comprehensive university course.",
+    author: "University of Helsinki",
+    tags: ["Full Stack Developer", "React", "Node.js", "MongoDB", "TypeScript"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Start Course", url: "https://fullstackopen.com/en/" }],
+    rating: "9.8/10"
+  },
+  {
+    id: 103,
+    title: "The Odin Project - Full Stack JavaScript",
+    domain: "Web2",
+    type: "Hands-on Curriculum",
+    difficulty: "Beginner",
+    description: "Free, open-source full stack curriculum covering HTML/CSS, JS, React, Node, and database integration.",
+    author: "The Odin Project",
+    tags: ["Full Stack Developer", "JavaScript", "React", "Node.js", "Express"],
+    cost: "Free",
+    official: false,
+    links: [{ label: "Explore Curriculum", url: "https://www.theodinproject.com/paths/full-stack-javascript" }],
+    rating: "9.7/10"
+  },
+
+  // Backend Engineer
+  {
+    id: 104,
+    title: "Backend Engineering Roadmap & Architecture",
+    domain: "Web2",
+    type: "Roadmap & Architecture",
+    difficulty: "Intermediate",
+    description: "Comprehensive step-by-step breakdown of OS, Networking, APIs, Databases, Caching, and Microservices.",
+    author: "roadmap.sh",
+    tags: ["Backend Engineer", "Backend", "APIs", "Databases", "Node.js"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "View Roadmap", url: "https://roadmap.sh/backend" }],
+    rating: "9.9/10"
+  },
+  {
+    id: 105,
+    title: "Node.js & Express Production Architecture",
+    domain: "Web2",
+    type: "Documentation & Best Practices",
+    difficulty: "Intermediate",
+    description: "Official guide and best practices for building scalable RESTful APIs, JWT authentication, and database connections.",
+    author: "Node.js Org",
+    tags: ["Backend Engineer", "Node.js", "Express", "REST API", "Database"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Official Docs", url: "https://nodejs.org/en/docs/guides" }],
+    rating: "9.6/10"
+  },
+  {
+    id: 106,
+    title: "Database Systems & SQL Masterclass",
+    domain: "Web2",
+    type: "Handbook & Interactive",
+    difficulty: "Intermediate",
+    description: "Master Relational Databases (PostgreSQL/MySQL), Data Modeling, Indexing, and Query Optimization.",
+    author: "Use The Index, Luke!",
+    tags: ["Backend Engineer", "SQL", "PostgreSQL", "Database Design", "Performance"],
+    cost: "Free",
+    official: false,
+    links: [{ label: "Read Guide", url: "https://use-the-index-luke.com/" }],
+    rating: "9.7/10"
+  },
+
+  // System Design
+  {
+    id: 107,
+    title: "The System Design Primer",
+    domain: "Web2",
+    type: "Comprehensive Guide",
+    difficulty: "Advanced",
+    description: "An open-source repository to learn how to design large-scale systems (Scalability, Load Balancing, Caching, Sharding).",
+    author: "Donne Martin",
+    tags: ["System Design", "Architecture", "Scalability", "Microservices", "Distributed Systems"],
+    cost: "Free",
+    official: false,
+    links: [{ label: "GitHub Repo", url: "https://github.com/donnemartin/system-design-primer" }],
+    rating: "9.9/10"
+  },
+  {
+    id: 108,
+    title: "ByteByteGo System Design Fundamentals",
+    domain: "Web2",
+    type: "Visual Guide",
+    difficulty: "Intermediate",
+    description: "Visual breakdowns of complex distributed systems like Rate Limiters, Message Queues, CDN, and Key-Value Stores.",
+    author: "Alex Xu",
+    tags: ["System Design", "Distributed Systems", "Architecture", "API Design"],
+    cost: "Free",
+    official: false,
+    links: [{ label: "Read Articles", url: "https://bytebytego.com/" }],
+    rating: "9.8/10"
+  },
+  {
+    id: 109,
+    title: "Designing Data-Intensive Applications Guide",
+    domain: "Web2",
+    type: "Architecture Reference",
+    difficulty: "Advanced",
+    description: "Key principles behind reliable, scalable, and maintainable systems by Martin Kleppmann.",
+    author: "Martin Kleppmann",
+    tags: ["System Design", "Databases", "Distributed Systems", "Consensus"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Book Overview", url: "https://dataintensive.net/" }],
+    rating: "9.9/10"
+  },
+
+  // AI Engineer
+  {
+    id: 110,
+    title: "AI Engineer Roadmap & Tech Stack",
+    domain: "AI/ML",
+    type: "Roadmap & Guide",
+    difficulty: "Beginner",
+    description: "Learn LLMs, Vector Databases, Prompt Engineering, LangChain, RAG architectures, and Fine-Tuning.",
+    author: "roadmap.sh",
+    tags: ["AI Engineer", "AI/ML", "LLMs", "RAG", "LangChain", "Vector DB"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "View Roadmap", url: "https://roadmap.sh/ai-engineer" }],
+    rating: "9.8/10"
+  },
+  {
+    id: 111,
+    title: "Hugging Face LLM & NLP Course",
+    domain: "AI/ML",
+    type: "Course & Labs",
+    difficulty: "Intermediate",
+    description: "Official hands-on course covering Transformers, tokenizers, fine-tuning open-source LLMs, and deployment.",
+    author: "Hugging Face",
+    tags: ["AI Engineer", "Transformers", "LLMs", "PyTorch", "Hugging Face"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Start Course", url: "https://huggingface.co/learn/nlp-course" }],
+    rating: "9.7/10"
+  },
+  {
+    id: 112,
+    title: "Building Systems with ChatGPT API & RAG",
+    domain: "AI/ML",
+    type: "Short Course",
+    difficulty: "Beginner",
+    description: "Learn to chain LLM calls, parse outputs, and implement Retrieval-Augmented Generation (RAG).",
+    author: "DeepLearning.AI",
+    tags: ["AI Engineer", "OpenAI", "RAG", "Prompt Engineering", "Python"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Access Course", url: "https://www.deeplearning.ai/short-courses/" }],
+    rating: "9.6/10"
+  },
+
+  // Applied Scientist
+  {
+    id: 113,
+    title: "Stanford CS229: Machine Learning & Applied Science",
+    domain: "AI/ML",
+    type: "University Course",
+    difficulty: "Advanced",
+    description: "Comprehensive mathematical foundations of Supervised Learning, Unsupervised Learning, and Deep Learning.",
+    author: "Stanford University",
+    tags: ["Applied Scientist", "AI/ML", "Mathematics", "Machine Learning", "Stanford"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Course Materials", url: "https://cs229.stanford.edu/" }],
+    rating: "9.9/10"
+  },
+  {
+    id: 114,
+    title: "fast.ai Practical Deep Learning for Coders",
+    domain: "AI/ML",
+    type: "Hands-on Course",
+    difficulty: "Intermediate",
+    description: "Top-down approach to applying state-of-the-art Deep Learning models in PyTorch to real-world datasets.",
+    author: "Jeremy Howard",
+    tags: ["Applied Scientist", "PyTorch", "Deep Learning", "Computer Vision", "NLP"],
+    cost: "Free",
+    official: false,
+    links: [{ label: "Start Learning", url: "https://course.fast.ai/" }],
+    rating: "9.8/10"
+  },
+  {
+    id: 115,
+    title: "PyTorch Official Tutorials & Research Models",
+    domain: "AI/ML",
+    type: "Documentation & Code",
+    difficulty: "Intermediate",
+    description: "Build, train, and benchmark neural network architectures from scratch using PyTorch.",
+    author: "PyTorch Core Team",
+    tags: ["Applied Scientist", "PyTorch", "Neural Networks", "Deep Learning"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Official Tutorials", url: "https://pytorch.org/tutorials/" }],
+    rating: "9.7/10"
+  },
+
+  // Cyber Security Developer
+  {
+    id: 116,
+    title: "Cyber Security Developer Roadmap",
+    domain: "Cyber Security",
+    type: "Roadmap & Guide",
+    difficulty: "Beginner",
+    description: "Step-by-step path covering Network Security, Cryptography, Secure Coding, Reverse Engineering, and Pentesting.",
+    author: "roadmap.sh",
+    tags: ["Cyber Security Developer", "Cyber Security", "Secure Coding", "Cryptography", "Network Security"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "View Roadmap", url: "https://roadmap.sh/cyber-security" }],
+    rating: "9.8/10"
+  },
+  {
+    id: 117,
+    title: "PortSwigger Web Security Academy",
+    domain: "Cyber Security",
+    type: "Hands-on Labs",
+    difficulty: "Intermediate",
+    description: "Master SQL Injection, XSS, CSRF, Authentication Bypasses, and Server-Side Vulnerabilities with interactive labs.",
+    author: "PortSwigger",
+    tags: ["Cyber Security Developer", "Web Security", "Burp Suite", "OWASP", "Pentesting"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Start Labs", url: "https://portswigger.net/web-security" }],
+    rating: "9.9/10"
+  },
+  {
+    id: 118,
+    title: "OWASP Secure Coding Practices Guide",
+    domain: "Cyber Security",
+    type: "Documentation & Standard",
+    difficulty: "Intermediate",
+    description: "Technology-agnostic set of software security coding practices to build resilient applications.",
+    author: "OWASP Foundation",
+    tags: ["Cyber Security Developer", "OWASP", "Secure Coding", "AppSec"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Download Guide", url: "https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/" }],
+    rating: "9.6/10"
+  },
+
+  // Devops Developer
+  {
+    id: 119,
+    title: "DevOps Engineer Roadmap & CI/CD Mastery",
+    domain: "Web2",
+    type: "Roadmap & Guide",
+    difficulty: "Beginner",
+    description: "Complete guide to Containers (Docker), Orchestration (Kubernetes), Infrastructure as Code (Terraform), and CI/CD.",
+    author: "roadmap.sh",
+    tags: ["Devops Developer", "DevOps", "Docker", "Kubernetes", "CI/CD", "Terraform"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "View Roadmap", url: "https://roadmap.sh/devops" }],
+    rating: "9.9/10"
+  },
+  {
+    id: 120,
+    title: "Docker & Containerization Hands-on Guide",
+    domain: "Web2",
+    type: "Documentation & Tutorial",
+    difficulty: "Beginner",
+    description: "Learn to containerize microservices, write Dockerfiles, configure Docker Compose, and optimize multi-stage builds.",
+    author: "Docker Inc.",
+    tags: ["Devops Developer", "Docker", "Containers", "DevOps", "Microservices"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Docker Docs", url: "https://docs.docker.com/get-started/" }],
+    rating: "9.7/10"
+  },
+  {
+    id: 121,
+    title: "GitHub Actions & Automated Pipelines",
+    domain: "Web2",
+    type: "Documentation",
+    difficulty: "Intermediate",
+    description: "Automate build, test, linting, and deployment workflows directly from your GitHub repositories.",
+    author: "GitHub",
+    tags: ["Devops Developer", "GitHub Actions", "CI/CD", "Automation", "DevOps"],
+    cost: "Free",
+    official: true,
+    links: [{ label: "Actions Guide", url: "https://docs.github.com/en/actions" }],
+    rating: "9.6/10"
   }
 ];

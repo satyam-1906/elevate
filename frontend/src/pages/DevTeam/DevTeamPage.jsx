@@ -6,10 +6,10 @@ import '../Legacy/LegacyPage.css';
 import './DevTeamPage.css';
 
 const devTeam = [
-  { id: 'vinay', name: 'Vinay Kumrawat', role: 'Frontend Developer', githubUrl: 'https://github.com/VinayCodes17', imageUrl: '/dev_pic/Vinay_Kumrawat.png' },
+  { id: 'vinay', name: 'Vinay Kumrawat', role: 'Full Stack Developer', githubUrl: 'https://github.com/VinayCodes17', imageUrl: '/dev_pic/Vinay_Kumrawat.png' },
   { id: 'tushar', name: 'Tushar Agarwal', role: 'Full Stack Developer', githubUrl: 'https://github.com/tushar-313', imageUrl: '/dev_pic/Tushar_Agarwal.png' },
   { id: 'bishal', name: 'Bishal Dey', role: 'Full Stack Developer', githubUrl: 'https://github.com/11deybishal-commits', imageUrl: '/dev_pic/Bishal_dey_1.jpg' },
-  { id: 'aviral', name: 'Aviral Joshi', role: 'Database & Cloud Engineer', githubUrl: 'https://github.com/aviraL27', imageUrl: '/dev_pic/Aviral_Joshi.png' }
+  { id: 'aviral', name: 'Aviral Joshi', role: 'Backend and Database Engineer', githubUrl: 'https://github.com/aviraL27', imageUrl: '/dev_pic/Aviral_Joshi.png' }
 ];
 
 function DevCard({ node, index }) {

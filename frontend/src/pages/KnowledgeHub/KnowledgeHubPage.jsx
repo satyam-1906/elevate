@@ -26,7 +26,7 @@ import './KnowledgeHubPage.css';
 
 export default function KnowledgeHubPage() {
   const location = useLocation();
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [resources, setResources] = useState([]);
   const [loadingResources, setLoadingResources] = useState(true);
 
@@ -35,28 +35,6 @@ export default function KnowledgeHubPage() {
     return params.get('domain') || 'All';
   }, [location.search]);
 
-  const [showQuestionnaire, setShowQuestionnaire] = useState(() => {
-    if (initialDomain !== 'All') return false;
-    return !sessionStorage.getItem('knowledgeHubFormCompleted');
-  });
-  const [questionStep, setQuestionStep] = useState(1); // 1 = Domain, 2 = Difficulty
-
-  // Scroll to top when questionnaire is active to ensure instant visibility
-  useEffect(() => {
-    if (showQuestionnaire) {
-      window.scrollTo(0, 0);
-    }
-  }, [showQuestionnaire]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const domain = params.get('domain');
-    if (domain) {
-      setActiveDomain(domain);
-      setShowQuestionnaire(false);
-    }
-  }, [location.search]);
-  
   const [searchQuery, setSearchQuery] = useState('');
   const [activeDomain, setActiveDomain] = useState(initialDomain);
   const [activeDifficulty, setActiveDifficulty] = useState('All');
@@ -64,8 +42,25 @@ export default function KnowledgeHubPage() {
   const [quoteData, setQuoteData] = useState(null);
   const [loadingQuote, setLoadingQuote] = useState(true);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const domain = params.get('domain');
+    if (domain) {
+      setActiveDomain(domain);
+    }
+  }, [location.search]);
+
   const domains = ['All', 'Web2', 'Web3', 'AI/ML', 'Cyber Security', 'App Development', 'Open Source'];
   const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+  const quickRoles = [
+    "Full Stack Developer",
+    "Backend Engineer",
+    "System Design",
+    "AI Engineer",
+    "Applied Scientist",
+    "Cyber Security Developer",
+    "Devops Developer"
+  ];
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/resources/all`)
@@ -108,24 +103,6 @@ export default function KnowledgeHubPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleDomainSelect = (domain) => {
-    setActiveDomain(domain);
-    setQuestionStep(2);
-  };
-
-  const handleDifficultySelect = (diff) => {
-    setActiveDifficulty(diff);
-    sessionStorage.setItem('knowledgeHubFormCompleted', 'true');
-    setShowQuestionnaire(false);
-  };
-
-  const handleSkip = () => {
-    setActiveDomain('All');
-    setActiveDifficulty('All');
-    sessionStorage.setItem('knowledgeHubFormCompleted', 'true');
-    setShowQuestionnaire(false);
-  };
-
   const getDomainIcon = (domainName) => {
     switch(domainName) {
       case 'Web2': return <Globe size={14} />;
@@ -160,55 +137,22 @@ export default function KnowledgeHubPage() {
     });
   }, [searchQuery, activeDomain, activeDifficulty, resources, isAdmin]);
 
+  if (!user) {
+    return (
+      <div className="knowledge-page" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <ParticleBackground count={26} intensity="medium" />
+        <div className="knowledge-empty-card glass" style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
+          <ShieldCheck size={48} className="empty-icon" />
+          <h2>Access Restricted</h2>
+          <p>Please login to access the Knowledge Hub resources.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="knowledge-page">
       <ParticleBackground count={26} intensity="medium" />
-
-      {/* Questionnaire Overlay */}
-      {showQuestionnaire && (
-        <div className="questionnaire-overlay">
-          <div className="questionnaire-content glass">
-            <div className="questionnaire-header">
-              <h2 className="questionnaire-title">
-                {questionStep === 1 
-                  ? "Which technical field do you want to master?" 
-                  : "What's your current experience level?"}
-              </h2>
-            </div>
-            
-            <div className="questionnaire-options">
-              {questionStep === 1 ? (
-                domains.slice(1).map((domain) => (
-                  <button 
-                    key={domain} 
-                    className="q-option-btn glass"
-                    onClick={() => handleDomainSelect(domain)}
-                  >
-                    <div className="q-option-icon">{getDomainIcon(domain)}</div>
-                    <span>{domain}</span>
-                  </button>
-                ))
-              ) : (
-                difficulties.slice(1).map((diff) => (
-                  <button 
-                    key={diff} 
-                    className="q-option-btn glass"
-                    onClick={() => handleDifficultySelect(diff)}
-                  >
-                    <span>{diff}</span>
-                  </button>
-                ))
-              )}
-            </div>
-
-            <div className="questionnaire-footer">
-              <button className="q-skip-btn" onClick={handleSkip}>
-                Skip & Browse All Resources <ArrowRight size={14} />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Standard Knowledge Hub View */}
       <div className="container knowledge-page-container">
@@ -243,6 +187,24 @@ export default function KnowledgeHubPage() {
               </Link>
             </div>
           )}
+        </div>
+
+        <div className="knowledge-quick-roles">
+          <span className="quick-roles-label">Select Engineering Pathway:</span>
+          <div className="quick-roles-grid">
+            {quickRoles.map(role => {
+              const isActive = searchQuery === role;
+              return (
+                <button 
+                  key={role} 
+                  className={`quick-role-btn ${isActive ? 'active' : ''}`} 
+                  onClick={() => setSearchQuery(isActive ? '' : role)}
+                >
+                  <span>{role}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="knowledge-controls-bar glass">

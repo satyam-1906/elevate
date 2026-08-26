@@ -34,11 +34,9 @@ const navItems = [
       { Icon: GitBranch, title: 'Open Source', desc: 'Collaborative development & tooling', href: '/domains/open-source' },
     ],
   },
-  { label: 'Legacy', href: '/legacy', isRoute: true },
   { label: 'Teams', href: '/teams', isRoute: true },
   { label: 'Events', href: '/events', isRoute: true },
   { label: 'Gallery', href: '/gallery', isRoute: true },
-  { label: 'Sponsors', href: '/#sponsors' },
   { label: 'Knowledge Hub', href: '/knowledge-hub', isRoute: true },
   { label: 'Dev Team', href: '/dev-team', isRoute: true },
 ];
@@ -194,8 +192,10 @@ export default function Navbar() {
             {user ? (
               <div className="nav-user-menu">
                 <button className="nav-user-btn" onClick={() => setUserMenuOpen(o => !o)}>
-                  <img src={user.picture || '/logo.jpg'} alt={user.name} className="nav-user-avatar" />
-                  <span className="nav-user-name">{user.name.split(' ')[0]}</span>
+                  <div className="nav-user-initial">
+                    {(user.name || 'User').charAt(0).toUpperCase()}
+                  </div>
+                  <span className="nav-user-name">{user.name ? user.name.split(' ')[0] : 'User'}</span>
                   <ChevronDown size={13} className={userMenuOpen ? 'open' : ''} />
                 </button>
                 {userMenuOpen && (

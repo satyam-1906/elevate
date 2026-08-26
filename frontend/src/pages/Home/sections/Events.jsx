@@ -7,34 +7,24 @@ import './Events.css';
 const upcomingEvents = [
   { 
     id: 1, 
-    dateMonth: 'OCT', 
-    dateDay: '15', 
-    title: 'Web3 & Zero-Knowledge Hackathon', 
-    type: 'Flagship Hackathon', 
-    desc: '48-hour sprint building decentralized applications and cryptographic proofs with $5,000 in bounties.',
-    location: 'Main Auditorium & Discord',
-    time: '48 Hours'
+    dateMonth: 'AUG', 
+    dateDay: '27', 
+    title: 'Club Intro Session', 
+    type: 'Orientation', 
+    desc: 'Join us for the introductory session to know more about the club, our vision, and upcoming activities.',
+    location: 'Seminar Hall',
+    time: '5:00 PM'
   },
   { 
     id: 2, 
-    dateMonth: 'OCT', 
-    dateDay: '22', 
-    title: 'Deploying Foundation Models at Edge', 
+    dateMonth: 'AUG', 
+    dateDay: '24', 
+    title: 'Road to Devcon - Web3 Workshop Series', 
     type: 'Technical Workshop', 
-    desc: 'Hands-on session quantizing LLMs with vLLM and deploying sub-second inference nodes.',
-    location: 'Lab 4 & Streamed Live',
-    time: '2:00 PM - 5:00 PM'
-  },
-  { 
-    id: 3, 
-    dateMonth: 'NOV', 
-    dateDay: '05', 
-    title: 'Elevate DevFest & Career Keynotes', 
-    type: 'Annual Conference', 
-    desc: 'Annual summit featuring engineering leads from global tech firms, project demos & networking.',
-    location: 'Convention Center',
-    time: 'Full Day Event'
-  },
+    desc: '6-day hands-on workshop covering the journey from basics to smart contracts, tokens & NFTs.',
+    location: 'Online',
+    time: '10:00 PM (Daily until Aug 29th)'
+  }
 ];
 
 export default function Events() {
@@ -85,13 +75,6 @@ export default function Events() {
                     <span>{event.time}</span>
                   </span>
                 </div>
-              </div>
-              
-              <div className="event-action">
-                <button className="btn btn-primary">
-                  <span>Register Free</span>
-                  <ArrowRight size={14} />
-                </button>
               </div>
             </div>
           ))}
