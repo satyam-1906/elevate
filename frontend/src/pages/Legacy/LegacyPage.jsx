@@ -27,16 +27,16 @@ export default function LegacyPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <p className="hero-kicker">T H E  C H R O N I C L E  O F</p>
+            <p className="hero-kicker">THE CHRONICLE OF</p>
             <h1 className="hero-title">OUR LEGACY</h1>
-            <p className="hero-subtitle">C I R C U I T S  O F  B R I L L I A N C E · W I R E D  T O G E T H E R</p>
+            <p className="hero-subtitle">CIRCUITS OF BRILLIANCE · WIRED TOGETHER</p>
             
             <motion.div 
               className="scroll-indicator"
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 2 }}
             >
-              <p>S C R O L L  T O  E X P L O R E</p>
+              <p>SCROLL TO EXPLORE</p>
               <div className="scroll-line"></div>
             </motion.div>
           </motion.div>

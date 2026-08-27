@@ -24,9 +24,15 @@
   align-items: center;
 }
 
+.about-grid > div {
+  min-width: 0;
+}
+
 .about-info {
   display: flex;
   flex-direction: column;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Stats */

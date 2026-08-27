@@ -17,7 +17,6 @@ import {
   LayoutDashboard,
   User
 } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
@@ -187,8 +186,6 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="nav-actions">
-            <ThemeToggle />
-
             {/* Auth button */}
             {user ? (
               <div className="nav-user-menu">

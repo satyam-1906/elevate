@@ -43,28 +43,32 @@
 
 .hero-kicker {
   font-size: 0.8rem;
-  letter-spacing: 4px;
+  letter-spacing: 0.5em;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 1rem;
+  padding-left: 0.5em;
 }
 
 .hero-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2rem, 8vw, 5rem);
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.1;
   margin: 0 0 1.5rem 0;
   background: var(--grad-2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -2px;
+  word-wrap: break-word;
 }
 
 .hero-subtitle {
   font-size: 0.9rem;
-  letter-spacing: 2px;
+  letter-spacing: 0.3em;
   color: rgba(255, 255, 255, 0.5);
   margin-bottom: 4rem;
+  padding: 0 1rem;
+  line-height: 1.6;
 }
 
 .scroll-indicator {
@@ -74,7 +78,8 @@
   gap: 10px;
   color: rgba(255, 255, 255, 0.4);
   font-size: 0.7rem;
-  letter-spacing: 2px;
+  letter-spacing: 0.3em;
+  padding-left: 0.3em;
 }
 
 .scroll-line {

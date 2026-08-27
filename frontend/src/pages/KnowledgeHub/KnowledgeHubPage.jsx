@@ -70,28 +70,23 @@ export default function KnowledgeHubPage() {
       .finally(() => setLoadingResources(false));
   }, []);
 
-  const fetchQuote = async () => {
+  const fetchQuote = () => {
     setLoadingQuote(true);
-    try {
-      const res = await fetch('/quote-api/api/random');
-      if (!res.ok) throw new Error('API error');
-      const data = await res.json();
-      const text = data.quote || data.en || data.text || (typeof data === 'string' ? data : null);
-      const author = data.author || 'Unknown';
-      if (text) {
-        setQuoteData({ text, author });
-      } else {
-        throw new Error('Invalid format');
-      }
-    } catch (err) {
-      // Robust Fallback in case of rate limit or offline
-      setQuoteData({
-        text: "First, solve the problem. Then, write the code.",
-        author: "John Johnson"
-      });
-    } finally {
-      setLoadingQuote(false);
-    }
+    const fallbackQuotes = [
+      { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
+      { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", author: "Martin Fowler" },
+      { text: "Experience is the name everyone gives to their mistakes.", author: "Oscar Wilde" },
+      { text: "Programming isn't about what you know; it's about what you can figure out.", author: "Chris Pine" },
+      { text: "The only way to learn a new programming language is by writing programs in it.", author: "Dennis Ritchie" },
+      { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" },
+      { text: "Fix the cause, not the symptom.", author: "Steve Maguire" },
+      { text: "Simplicity is the soul of efficiency.", author: "Austin Freeman" },
+      { text: "Before software can be reusable it first has to be usable.", author: "Ralph Johnson" },
+      { text: "Make it work, make it right, make it fast.", author: "Kent Beck" }
+    ];
+    const randomQuote = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+    setQuoteData(randomQuote);
+    setLoadingQuote(false);
   };
 
   useEffect(() => {
