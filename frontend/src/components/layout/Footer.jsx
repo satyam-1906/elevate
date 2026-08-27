@@ -48,7 +48,7 @@ export default function Footer() {
           <div className="footer-links-group">
             <h4 className="footer-title">Technical Tracks</h4>
             <ul className="footer-list">
-              <li><Link to="/domains/web2">Web2 & Cloud</Link></li>
+              <li><a href="/#domains">Web2 & Cloud</a></li>
               <li><a href="/#domains">Web3 & Protocols</a></li>
               <li><a href="/#domains">AI & Machine Learning</a></li>
               <li><a href="/#domains">Cyber Security</a></li>
