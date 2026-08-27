@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/</loc>
+    </url>
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/teams</loc>
+    </url>
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/events</loc>
+    </url>
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/knowledge-hub</loc>
+    </url>
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/legacy</loc>
+    </url>
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/dev-team</loc>
+    </url>
+
+    <url>
+        <loc>https://elevate-black-two.vercel.app/gallery</loc>
+    </url>
+
+</urlset>
