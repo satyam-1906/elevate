@@ -50,7 +50,7 @@
 
 .hero-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 900;
   line-height: 1;
   margin: 0 0 1.5rem 0;
@@ -103,7 +103,7 @@
 
 .year-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 8rem;
+  font-size: clamp(3rem, 12vw, 8rem);
   font-weight: 900;
   margin: 0;
   line-height: 1;
@@ -312,8 +312,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-title { font-size: 4rem; }
-  .year-title { font-size: 4rem; }
   .circuit-node { width: 240px; }
   .tree-children-row { flex-direction: column; align-items: center; }
 }
