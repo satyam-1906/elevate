@@ -273,32 +273,61 @@
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
-/* GitHub Button */
-.cyber-github {
+/* Social Links Container & Buttons */
+.cyber-socials {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  color: #999;
-  text-decoration: none;
+  gap: 0.6rem;
   margin-top: 0.8rem;
-  transition: all 0.3s;
-  padding: 8px 16px;
+  flex-wrap: wrap;
+}
+
+.cyber-social-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: #a0a0b0;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  padding: 6px 12px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  align-self: flex-start;
 }
 
-.cyber-dev-card:hover .cyber-github {
-  background: rgba(0, 255, 255, 0.1);
+.cyber-social-link:hover {
   color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.cyber-dev-card:hover .cyber-social-link.cyber-github {
+  background: rgba(0, 255, 255, 0.1);
   border-color: rgba(0, 255, 255, 0.3);
   box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1);
 }
 
-.cyber-github:active {
+.cyber-social-link.cyber-github:hover {
+  background: rgba(0, 255, 255, 0.2);
+  border-color: var(--glow);
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.25);
+}
+
+.cyber-dev-card:hover .cyber-social-link.cyber-linkedin {
+  background: rgba(10, 102, 194, 0.15);
+  border-color: rgba(10, 102, 194, 0.35);
+  box-shadow: 0 4px 15px rgba(10, 102, 194, 0.15);
+}
+
+.cyber-social-link.cyber-linkedin:hover {
+  background: rgba(10, 102, 194, 0.35);
+  border-color: #0077b5;
+  box-shadow: 0 4px 20px rgba(0, 119, 181, 0.35);
+  color: #ffffff;
+}
+
+.cyber-social-link:active {
   transform: scale(0.95);
 }
 
