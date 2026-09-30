@@ -4,9 +4,10 @@ import { useAuth } from '../../../context/AuthContext';
 import AdminGuard from '../AdminGuard';
 import {
   LayoutDashboard, CalendarDays, Image, LogOut, Upload,
-  Trash2, Plus, X, CheckCircle, AlertCircle, Loader2, Edit3, Eye, Info, BookOpen
+  Trash2, Plus, X, CheckCircle, AlertCircle, Loader2, Edit3, Info, BookOpen, Trophy
 } from 'lucide-react';
 import { ResourceForm, ResourcesList } from './AdminResources';
+import { HallOfFameForm, HallOfFameList } from './AdminHallOfFame';
 import './AdminDashboard.css';
 
 const API = import.meta.env.VITE_API_URL;
@@ -430,6 +431,7 @@ function EventsList({ token, refresh, setRefresh, addToast }) {
 function Sidebar({ active, setActive, onLogout, user }) {
   const items = [
     { id: 'events', label: 'Events',  Icon: CalendarDays },
+    { id: 'hall-of-fame', label: 'Hall of Fame', Icon: Trophy },
     { id: 'resources', label: 'Knowledge Hub', Icon: BookOpen },
     { id: 'media',  label: 'Media',   Icon: Image },
   ];
@@ -490,6 +492,11 @@ function Dashboard() {
     setRefresh(r => r + 1);
   };
 
+  const handleHallOfFameCreated = (item) => {
+    addToast({ type: 'success', message: `Event "${item.eventName}" added to Hall of Fame!` });
+    setRefresh(r => r + 1);
+  };
+
   const handleResourceCreated = (res) => {
     addToast({ type: 'success', message: `Resource "${res.title}" created successfully!` });
     setRefresh(r => r + 1);
@@ -504,11 +511,16 @@ function Dashboard() {
         <div className="admin-header">
           <div>
             <h1 className="admin-page-title">
-              {active === 'events' ? 'Event Management' : active === 'resources' ? 'Knowledge Hub' : 'Media Library'}
+              {active === 'events' ? 'Event Management' 
+                : active === 'hall-of-fame' ? 'Hall of Fame Management'
+                : active === 'resources' ? 'Knowledge Hub' 
+                : 'Media Library'}
             </h1>
             <p className="admin-page-sub">
               {active === 'events'
                 ? 'Create, edit, delete, and manage campus events with Cloudinary image processing.'
+                : active === 'hall-of-fame'
+                ? 'Celebrate and archive club event winners, banners, dates, and podium results.'
                 : active === 'resources'
                 ? 'Manage resources, tutorials, and guides for the Knowledge Hub.'
                 : 'Browse and manage uploaded assets.'}
@@ -528,6 +540,16 @@ function Dashboard() {
               <h3 className="section-label">All Published Events</h3>
             </div>
             <EventsList token={token} refresh={refresh} setRefresh={setRefresh} addToast={addToast} />
+          </>
+        )}
+
+        {active === 'hall-of-fame' && (
+          <>
+            <HallOfFameForm token={token} onCreated={handleHallOfFameCreated} />
+            <div className="section-divider">
+              <h3 className="section-label">All Hall of Fame Events & Winners</h3>
+            </div>
+            <HallOfFameList token={token} refresh={refresh} setRefresh={setRefresh} addToast={addToast} />
           </>
         )}
 

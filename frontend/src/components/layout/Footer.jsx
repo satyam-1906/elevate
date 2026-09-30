@@ -73,6 +73,7 @@ export default function Footer() {
             <ul className="footer-list">
               <li><a href="/#about">About Us</a></li>
               <li><Link to="/legacy">Our Legacy</Link></li>
+              <li><Link to="/hall-of-fame">Hall of Fame</Link></li>
               <li><a href="/#sponsors">Industry Sponsors</a></li>
               <li><a href="/#contact">Contact Core Team</a></li>
               <li><a href="/#about">Code of Conduct</a></li>

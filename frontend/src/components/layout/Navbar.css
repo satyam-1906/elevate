@@ -59,7 +59,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1050px;
+  max-width: 1140px;
   padding: 6px 14px;
   border-radius: 999px;
   background: var(--nav-bg);
@@ -132,7 +132,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 8px 12px;
+  padding: 7px 10px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;

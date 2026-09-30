@@ -30,6 +30,11 @@ exports.googleLogin = async (req, res) => {
     const normalizedEmail = email.toLowerCase();
     const isAuthorizedAdmin = ADMIN_EMAILS.includes(normalizedEmail);
 
+    // If user attempted to log in as admin but is not authorized
+    if (role === 'admin' && !isAuthorizedAdmin) {
+      return res.status(403).json({ error: 'Access denied. You do not have admin privileges.' });
+    }
+
     // Check if user exists
     let user = await User.findOne({ email: normalizedEmail });
     if (!user) {
@@ -38,7 +43,7 @@ exports.googleLogin = async (req, res) => {
         email: normalizedEmail,
         name,
         picture,
-        role: isAuthorizedAdmin ? 'admin' : (role === 'admin' ? 'admin' : 'student')
+        role: isAuthorizedAdmin ? 'admin' : 'student'
       });
     } else {
       // If user is in the authorized admin list, upgrade/ensure admin role

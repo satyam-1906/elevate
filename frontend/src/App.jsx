@@ -13,6 +13,7 @@ import LoginPage from './pages/Login/LoginPage';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
 import EventsPage from './pages/Events/EventsPage';
 import KnowledgeHubPage from './pages/KnowledgeHub/KnowledgeHubPage';
+import HallOfFamePage from './pages/HallOfFame/HallOfFamePage';
 
 /* Lazy-load the heavy Legacy page (Three.js) — keeps initial bundle lean */
 const LegacyPage = lazy(() => import('./pages/Legacy/LegacyPage'));
@@ -181,6 +182,7 @@ function AppContent() {
             <Route path="/" element={<Home />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/events" element={<EventsPage />} />
+            <Route path="/hall-of-fame" element={<HallOfFamePage />} />
             <Route path="/knowledge-hub" element={<KnowledgeHubPage />} />
             <Route
               path="/legacy"

@@ -41,13 +41,15 @@ const legacyRoutes    = require('./routes/legacy.routes');
 const sponsorRoutes   = require('./routes/sponsor.routes');
 const mediaRoutes     = require('./routes/media.routes');
 const authRoutes      = require('./routes/auth.routes');
+const hallOfFameRoutes = require('./routes/hallOfFame.routes');
 
-app.use('/api/events',     eventRoutes);
-app.use('/api/challenges', challengeRoutes);
-app.use('/api/resources',  resourceRoutes);
-app.use('/api/legacys',    legacyRoutes);
-app.use('/api/sponsors',   sponsorRoutes);
-app.use('/api/medias',     mediaRoutes);
-app.use('/api/auths',      authRoutes);
+app.use('/api/events',       eventRoutes);
+app.use('/api/challenges',   challengeRoutes);
+app.use('/api/resources',    resourceRoutes);
+app.use('/api/legacys',      legacyRoutes);
+app.use('/api/sponsors',     sponsorRoutes);
+app.use('/api/medias',       mediaRoutes);
+app.use('/api/auths',        authRoutes);
+app.use('/api/hall-of-fame', hallOfFameRoutes);
 
 module.exports = app;
