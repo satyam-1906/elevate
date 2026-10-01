@@ -7,6 +7,7 @@ on:
 
 jobs:
   sync:
+    if: github.repository == 'satyam-1906/elevate'
     runs-on: ubuntu-latest
 
     steps:
