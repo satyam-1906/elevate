@@ -196,25 +196,6 @@ Layouts are **adapted**, not shrunk. Must work correctly on Desktop, Tablet, and
 
 **Phase 3 — Advanced Features**: global search, advanced filters, leaderboards, event galleries, announcements, member showcase, project showcase.
 
-### MVP checklist (v1 complete when...)
-- [ ] Visitors understand what Elevate is
-- [ ] All six domains available, each with its own page
-- [ ] Legacy timeline works
-- [ ] Events explorable, individual event pages work
-- [ ] Sponsors displayed
-- [ ] Knowledge Hub works, resources filterable
-- [ ] Challenges explorable
-- [ ] Admin can manage events, resources, challenges, legacy, sponsors
-- [ ] Site works properly on mobile
-- [ ] Content updatable without changing frontend code
-
----
-
-## ✅ Open Decisions (finalize before/during build)
-
-Final logo/brand assets · final colors (confirm against WhatsApp palette) · homepage headline · About Elevate copy · domain descriptions · current & previous leadership data · existing event data · Knowledge Hub starter resources · sponsor info · challenge system requirements · Join Elevate process · social links · contact email · admin access list · post-launch content ownership.
-
----
 
 ## 🚀 Quick Start
 
