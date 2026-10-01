@@ -1,0 +1,23 @@
+name: Sync Hosting Fork
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync fork
+        run: |
+          git clone https://x-access-token:${{ secrets.FORK_SYNC_SECRET }}@github.com/tushar-313/elevate.git
+          cd elevate
+
+          git remote add upstream https://github.com/satyam-1906/elevate.git
+          git fetch upstream
+
+          git checkout main
+          git reset --hard upstream/main
+          git push origin main --force

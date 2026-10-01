@@ -21,6 +21,7 @@ import {
 import StaggeredText from '../../components/motion/StaggeredText';
 import ParticleBackground from '../../components/common/ParticleBackground';
 import { useAuth } from '../../context/AuthContext';
+import { trackGAEvent } from '../../utils/analytics';
 import './HallOfFamePage.css';
 
 const API = import.meta.env.VITE_API_URL;
@@ -79,6 +80,56 @@ export default function HallOfFamePage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  // ── SEO: Inject Schema.org JSON-LD Structured Data for Hall of Fame ──
+  useEffect(() => {
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Hall of Fame | Elevate IIIT Nagpur',
+      url: 'https://elevate-black-two.vercel.app/hall-of-fame',
+      description: 'Honoring student champions, hackathon winners, and top project showcases across Elevate technical challenges at IIIT Nagpur.',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Elevate IIIT Nagpur',
+        url: 'https://elevate-black-two.vercel.app/',
+        logo: 'https://elevate-black-two.vercel.app/logo.jpg'
+      },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: events.map((ev, idx) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          item: {
+            '@type': 'Event',
+            name: ev.eventName,
+            startDate: ev.date,
+            description: ev.description,
+            image: ev.bannerUrl || 'https://elevate-black-two.vercel.app/images/ganesh_chaturthi_challenge.png',
+            organizer: {
+              '@type': 'Organization',
+              name: 'Elevate IIIT Nagpur',
+              url: 'https://elevate-black-two.vercel.app/'
+            }
+          }
+        }))
+      }
+    };
+
+    let scriptTag = document.getElementById('hall-of-fame-schema');
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'hall-of-fame-schema';
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(jsonLd);
+
+    return () => {
+      const tag = document.getElementById('hall-of-fame-schema');
+      if (tag) tag.remove();
+    };
+  }, [events]);
 
   // Compute categories dynamically
   const categories = useMemo(() => {
@@ -208,7 +259,10 @@ export default function HallOfFamePage() {
               <button
                 key={cat}
                 className={`hof-tab-btn ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => {
+                  setSelectedCategory(cat);
+                  trackGAEvent('hall_of_fame_filter_category', { category: cat });
+                }}
               >
                 {cat === 'All' && <Sparkles size={14} />}
                 {cat === 'Hackathon' && <Flame size={14} />}
@@ -305,7 +359,10 @@ export default function HallOfFamePage() {
                         <button
                           type="button"
                           className="hof-view-poster-btn"
-                          onClick={() => setActivePosterModal({ url: bannerImageSrc, title: ev.eventName })}
+                          onClick={() => {
+                            setActivePosterModal({ url: bannerImageSrc, title: ev.eventName });
+                            trackGAEvent('hall_of_fame_view_poster', { event_name: ev.eventName });
+                          }}
                           title="View Full Poster"
                         >
                           <Eye size={13} />
@@ -396,6 +453,14 @@ export default function HallOfFamePage() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hof-project-link"
+                                        onClick={() => {
+                                          trackGAEvent('hall_of_fame_repo_click', {
+                                            winner_name: winner.name,
+                                            project_title: winner.projectTitle,
+                                            project_url: winner.projectUrl,
+                                            event_name: ev.eventName
+                                          });
+                                        }}
                                       >
                                         <span>View Solution Repository</span>
                                         <ExternalLink size={12} />

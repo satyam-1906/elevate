@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense, useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer';
 import Teams from './pages/Teams/Teams';
 import LogoReveal from './components/motion/LogoReveal';
 import { useLenis } from './hooks/useLenis';
+import { usePageTracking } from './hooks/usePageTracking';
 import LoginPage from './pages/Login/LoginPage';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
 import EventsPage from './pages/Events/EventsPage';
@@ -77,6 +78,9 @@ function ScrollToHashOrTop({ lenisRef }) {
 }
 
 function AppContent() {
+  // ── Automatic Page Tracking for Google Analytics & SEO ──────────────
+  usePageTracking();
+
   // ── Lenis smooth scroll (spring inertia + GSAP sync) ──────────────────
   const lenisRef = useLenis();
 
@@ -183,6 +187,7 @@ function AppContent() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/hall-of-fame" element={<HallOfFamePage />} />
+            <Route path="/halloffame" element={<Navigate to="/hall-of-fame" replace />} />
             <Route path="/knowledge-hub" element={<KnowledgeHubPage />} />
             <Route
               path="/legacy"
